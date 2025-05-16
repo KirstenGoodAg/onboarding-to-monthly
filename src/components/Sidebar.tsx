@@ -7,7 +7,7 @@ const navItems = [
   {
     label: "Upload",
     to: "/upload",
-    img: "https://goodagriculture.com/wp-content/uploads/2025/03/plus.png", // fallback, plus icon not provided, user may update
+    img: "https://goodagriculture.com/wp-content/uploads/2025/05/add.png", // Updated plus icon
     alt: "Upload",
     id: "plus",
     defaultSvg: (
