@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +98,12 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
   }
 }
+
+/* Glassmorphism for dashboard cards */
+.glass {
+  @apply bg-white/60 backdrop-blur-xl border border-white/30;
+}
+
