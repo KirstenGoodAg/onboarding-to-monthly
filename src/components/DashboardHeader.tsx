@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
@@ -58,8 +57,8 @@ export default function DashboardHeader() {
               <img
                 src={vineImg}
                 alt="Vine progress bar"
-                className="h-8 md:h-12 transition-transform duration-150 group-hover:scale-105 cursor-pointer"
-                style={{ width: "160px", objectFit: "contain" }}
+                className="transition-transform duration-150 group-hover:scale-105 cursor-pointer"
+                style={{ width: "100px", height: "50px", objectFit: "contain" }}
               />
               <span className="text-xs text-gray-500 mt-1">
                 {`Next: ${onboardingSteps[currentStep]?.label ?? "All steps complete!"}`}
