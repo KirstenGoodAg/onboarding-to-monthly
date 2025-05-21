@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
@@ -49,8 +48,10 @@ export default function DashboardHeader({ onboardingCheckedCount = 0 }: Dashboar
   let vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/Empty-Vine.png";
   if (onboardingCheckedCount === 1) {
     vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/20-Vine.png";
-  } else if (onboardingCheckedCount === 2 || onboardingCheckedCount === 3) {
+  } else if (onboardingCheckedCount === 2) {
     vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/40-Vine.png";
+  } else if (onboardingCheckedCount === 3) {
+    vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/60-vine-1.png";
   }
 
   return (
