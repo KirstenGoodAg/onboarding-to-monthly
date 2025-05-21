@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
@@ -35,10 +36,22 @@ const onboardingSteps = [
 // You might want to load progress from state or props later
 const currentStep = 0; // set this dynamically as onboarding progresses
 
-export default function DashboardHeader() {
+// Add prop type for onboardingCheckedCount
+interface DashboardHeaderProps {
+  onboardingCheckedCount?: number;
+}
+
+export default function DashboardHeader({ onboardingCheckedCount = 0 }: DashboardHeaderProps) {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const navigate = useNavigate();
-  const vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/Empty-Vine.png";
+
+  // Select the correct vine image based on checked count
+  let vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/Empty-Vine.png";
+  if (onboardingCheckedCount === 1) {
+    vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/20-Vine.png";
+  } else if (onboardingCheckedCount === 2 || onboardingCheckedCount === 3) {
+    vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/40-Vine.png";
+  }
 
   return (
     <header className="flex items-start justify-between w-full pb-4 pt-6 px-2 md:px-8">

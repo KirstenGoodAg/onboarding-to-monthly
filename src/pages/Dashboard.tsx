@@ -37,9 +37,12 @@ const Dashboard = () => {
     setChecked(prev => prev.map((val, i) => (i === idx ? checkedVal : val)));
   };
 
+  // Count total checked cards
+  const totalChecked = checked.filter(Boolean).length;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-transparent">
-      <DashboardHeader />
+      <DashboardHeader onboardingCheckedCount={totalChecked} />
       <div className="flex flex-1 w-full justify-center items-start">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-4xl px-2 py-8">
           {onboardingCards.map((card, idx) => (
@@ -82,4 +85,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
