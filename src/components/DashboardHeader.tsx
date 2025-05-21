@@ -55,6 +55,8 @@ export default function DashboardHeader({ onboardingCheckedCount = 0 }: Dashboar
     vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/60-vine-1.png";
   } else if (onboardingCheckedCount === 4) {
     vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/80-vine.png";
+  } else if (onboardingCheckedCount === 5) {
+    vineImg = "https://goodagriculture.com/wp-content/uploads/2025/05/Full-vine.png";
   }
 
   return (
