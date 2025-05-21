@@ -49,6 +49,10 @@ const Dashboard = () => {
       <DashboardHeader onboardingCheckedCount={totalChecked} />
       <div className="flex flex-1 w-full justify-center items-start">
         <div className="grid grid-cols-1 w-full max-w-4xl px-2 py-8 gap-6">
+          {/* Onboarding Header */}
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 pl-2">
+            Onboarding
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {onboardingCards.slice(0, 4).map((card, idx) => (
               <Card
