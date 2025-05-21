@@ -1,10 +1,8 @@
-import React from "react";
 import DashboardHeader from "../components/DashboardHeader";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OnboardingSection from "../components/OnboardingSection";
 import MonthlyBooksSection from "../components/MonthlyBooksSection";
-import { MonthlyBooksProvider, useMonthlyBooksContext } from "../context/MonthlyBooksContext";
 
 // Step data for onboarding
 const onboardingCards = [
@@ -90,11 +88,10 @@ const recentInboxMessages = [
   { id: 3, subject: "Welcome to Good Agriculture!", date: "2025-05-18" },
 ];
 
-const DashboardContent = () => {
+const Dashboard = () => {
   const [checked, setChecked] = useState([false, false, false, false, false]);
   const [graphRange, setGraphRange] = useState<"6m" | "12m" | "2y" | "3y">("6m");
   const navigate = useNavigate();
-  const { setMonthlyBooksVisible } = useMonthlyBooksContext();
 
   const handleCardClick = (link: string) => {
     navigate(link);
@@ -106,13 +103,9 @@ const DashboardContent = () => {
 
   // Count total checked cards
   const totalChecked = checked.filter(Boolean).length;
+
   // All onboarding complete?
   const onboardingComplete = totalChecked === onboardingCards.length;
-
-  // Let context know when Monthly Books should be shown
-  React.useEffect(() => {
-    setMonthlyBooksVisible(onboardingComplete);
-  }, [onboardingComplete, setMonthlyBooksVisible]);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-transparent">
@@ -132,7 +125,7 @@ const DashboardContent = () => {
               graphRange={graphRange}
               setGraphRange={setGraphRange}
               uncategorizedTransactions={uncategorizedTransactions}
-              onReviewClick={() => navigate('/transaction-review')}
+              onReviewClick={() => navigate('/transactions')}
               recentInboxMessages={recentInboxMessages}
               onInboxClick={() => navigate('/inbox')}
             />
@@ -142,11 +135,5 @@ const DashboardContent = () => {
     </div>
   );
 };
-
-const Dashboard = () => (
-  <MonthlyBooksProvider>
-    <DashboardContent />
-  </MonthlyBooksProvider>
-);
 
 export default Dashboard;

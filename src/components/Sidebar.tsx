@@ -1,6 +1,5 @@
 
 import { NavLink, useLocation } from "react-router-dom";
-import { useMonthlyBooksContext } from "../context/MonthlyBooksContext";
 
 const SIDEBAR_BG = "#336633";
 
@@ -38,33 +37,8 @@ const navItems = [
   },
 ];
 
-const conditionalNavItems = [
-  {
-    label: "Reports",
-    to: "/reports",
-    img: "https://cdn-icons-png.flaticon.com/128/3106/3106770.png", // Pick a standard image from flaticon
-    alt: "Reports",
-    id: "reports",
-  },
-  {
-    label: "Transaction Review",
-    to: "/transaction-review",
-    img: "https://cdn-icons-png.flaticon.com/128/10025/10025176.png", // Transaction icon
-    alt: "Transaction Review",
-    id: "transactions",
-  },
-];
-
 const Sidebar = () => {
   const location = useLocation();
-  let monthlyBooksVisible = false;
-  // Use context if on dashboard (avoid error if context is not present, e.g. on other routes)
-  try {
-    // If context available, use it
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    ({ monthlyBooksVisible } = useMonthlyBooksContext());
-  } catch {}
-
   return (
     <aside
       className="fixed top-0 left-0 h-screen flex flex-col items-center py-6 z-40"
@@ -98,20 +72,6 @@ const Sidebar = () => {
                 ? <img src={item.img} alt={item.alt} className="w-7 h-7" />
                 : item.defaultSvg
             }
-          </NavLink>
-        ))}
-        {/* Conditionally render navs when Monthly Books section is visible */}
-        {monthlyBooksVisible && conditionalNavItems.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            className={({ isActive }) =>
-              `flex items-center justify-center transition-all duration-150 w-12 h-12 rounded-xl
-              ${isActive || location.pathname.startsWith(item.to) ? "bg-white/30 ring-2 ring-white" : "hover:bg-white/10"}
-              `}
-            title={item.label}
-          >
-            <img src={item.img} alt={item.alt} className="w-7 h-7" />
           </NavLink>
         ))}
       </nav>
