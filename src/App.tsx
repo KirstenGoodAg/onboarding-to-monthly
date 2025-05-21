@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,8 @@ import FileUpload from "./pages/FileUpload";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Inbox from "./pages/Inbox";
+import Reports from "./pages/Reports";
+import TransactionReview from "./pages/TransactionReview";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,8 @@ const App = () => (
               <Route path="/upload" element={<FileUpload />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/inbox" element={<Inbox />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/transaction-review" element={<TransactionReview />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

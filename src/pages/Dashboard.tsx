@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OnboardingSection from "../components/OnboardingSection";
 import MonthlyBooksSection from "../components/MonthlyBooksSection";
+import { MonthlyBooksProvider, useMonthlyBooksContext } from "../context/MonthlyBooksContext";
 
 // Step data for onboarding
 const onboardingCards = [
@@ -88,10 +89,11 @@ const recentInboxMessages = [
   { id: 3, subject: "Welcome to Good Agriculture!", date: "2025-05-18" },
 ];
 
-const Dashboard = () => {
+const DashboardContent = () => {
   const [checked, setChecked] = useState([false, false, false, false, false]);
   const [graphRange, setGraphRange] = useState<"6m" | "12m" | "2y" | "3y">("6m");
   const navigate = useNavigate();
+  const { setMonthlyBooksVisible } = useMonthlyBooksContext();
 
   const handleCardClick = (link: string) => {
     navigate(link);
@@ -103,9 +105,13 @@ const Dashboard = () => {
 
   // Count total checked cards
   const totalChecked = checked.filter(Boolean).length;
-
   // All onboarding complete?
   const onboardingComplete = totalChecked === onboardingCards.length;
+
+  // Let context know when Monthly Books should be shown
+  React.useEffect(() => {
+    setMonthlyBooksVisible(onboardingComplete);
+  }, [onboardingComplete, setMonthlyBooksVisible]);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-transparent">
@@ -125,7 +131,7 @@ const Dashboard = () => {
               graphRange={graphRange}
               setGraphRange={setGraphRange}
               uncategorizedTransactions={uncategorizedTransactions}
-              onReviewClick={() => navigate('/transactions')}
+              onReviewClick={() => navigate('/transaction-review')}
               recentInboxMessages={recentInboxMessages}
               onInboxClick={() => navigate('/inbox')}
             />
@@ -135,5 +141,11 @@ const Dashboard = () => {
     </div>
   );
 };
+
+const Dashboard = () => (
+  <MonthlyBooksProvider>
+    <DashboardContent />
+  </MonthlyBooksProvider>
+);
 
 export default Dashboard;
