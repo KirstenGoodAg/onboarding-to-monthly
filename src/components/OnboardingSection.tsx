@@ -62,7 +62,7 @@ const OnboardingSection = ({
       {cards.length > 4 && (
         <Card
           key={cards[4].label}
-          className="flex flex-col justify-between h-48 w-full max-w-md cursor-pointer transition-transform hover:scale-105 hover:shadow-xl bg-white/90 relative"
+          className="flex flex-col justify-between h-48 w-full max-w-md cursor-pointer transition-transform hover:scale-105 hover:shadow-xl bg-white/90 relative mt-6"
           onClick={() => onCardClick(cards[4].link)}
           tabIndex={0}
           role="button"
@@ -96,3 +96,4 @@ const OnboardingSection = ({
 );
 
 export default OnboardingSection;
+
