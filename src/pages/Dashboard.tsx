@@ -88,9 +88,54 @@ const recentInboxMessages = [
   { id: 3, subject: "Welcome to Good Agriculture!", date: "2025-05-18" },
 ];
 
+// Sample expense data
+const recentExpenses = [
+  { id: 1, description: "Fertilizer Purchase", amount: 276.79, category: "Supplies", date: "2025-05-28" },
+  { id: 2, description: "Tractor Fuel", amount: 116.42, category: "Fuel", date: "2025-05-27" },
+  { id: 3, description: "Seed Purchase", amount: 445.23, category: "Supplies", date: "2025-05-26" },
+  { id: 4, description: "Equipment Repair", amount: 530.12, category: "Maintenance", date: "2025-05-25" },
+  { id: 5, description: "Irrigation Equipment", amount: 892.45, category: "Equipment", date: "2025-05-24" },
+  { id: 6, description: "Pesticide Application", amount: 234.67, category: "Supplies", date: "2025-05-23" },
+  { id: 7, description: "Labor Costs", amount: 1200.00, category: "Labor", date: "2025-05-22" },
+  { id: 8, description: "Insurance Payment", amount: 345.88, category: "Insurance", date: "2025-05-21" },
+  { id: 9, description: "Vehicle Maintenance", amount: 189.33, category: "Maintenance", date: "2025-05-20" },
+  { id: 10, description: "Office Supplies", amount: 67.45, category: "Office", date: "2025-05-19" },
+];
+
+const expenseCategoriesData = {
+  "1m": [
+    { name: "Supplies", value: 956.69, color: "#8884d8" },
+    { name: "Fuel", value: 116.42, color: "#82ca9d" },
+    { name: "Maintenance", value: 719.45, color: "#ffc658" },
+    { name: "Equipment", value: 892.45, color: "#ff7300" },
+    { name: "Labor", value: 1200.00, color: "#8dd1e1" },
+    { name: "Insurance", value: 345.88, color: "#d084d0" },
+    { name: "Office", value: 67.45, color: "#ffb347" },
+  ],
+  "6m": [
+    { name: "Supplies", value: 5740.15, color: "#8884d8" },
+    { name: "Fuel", value: 698.52, color: "#82ca9d" },
+    { name: "Maintenance", value: 4316.70, color: "#ffc658" },
+    { name: "Equipment", value: 5354.70, color: "#ff7300" },
+    { name: "Labor", value: 7200.00, color: "#8dd1e1" },
+    { name: "Insurance", value: 2075.28, color: "#d084d0" },
+    { name: "Office", value: 404.70, color: "#ffb347" },
+  ],
+  "12m": [
+    { name: "Supplies", value: 11480.30, color: "#8884d8" },
+    { name: "Fuel", value: 1397.04, color: "#82ca9d" },
+    { name: "Maintenance", value: 8633.40, color: "#ffc658" },
+    { name: "Equipment", value: 10709.40, color: "#ff7300" },
+    { name: "Labor", value: 14400.00, color: "#8dd1e1" },
+    { name: "Insurance", value: 4150.56, color: "#d084d0" },
+    { name: "Office", value: 809.40, color: "#ffb347" },
+  ],
+};
+
 const Dashboard = () => {
   const [checked, setChecked] = useState([false, false, false, false, false]);
   const [graphRange, setGraphRange] = useState<"6m" | "12m" | "2y" | "3y">("6m");
+  const [expenseTimePeriod, setExpenseTimePeriod] = useState<"1m" | "6m" | "12m">("1m");
   const navigate = useNavigate();
 
   const handleCardClick = (link: string) => {
@@ -128,6 +173,10 @@ const Dashboard = () => {
               onReviewClick={() => navigate('/transactions')}
               recentInboxMessages={recentInboxMessages}
               onInboxClick={() => navigate('/inbox')}
+              recentExpenses={recentExpenses}
+              expenseCategories={expenseCategoriesData[expenseTimePeriod]}
+              expenseTimePeriod={expenseTimePeriod}
+              onExpenseTimePeriodChange={setExpenseTimePeriod}
             />
           )}
         </div>
