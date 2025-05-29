@@ -1,5 +1,6 @@
+
 import DashboardHeader from "../components/DashboardHeader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import OnboardingSection from "../components/OnboardingSection";
 import MonthlyBooksSection from "../components/MonthlyBooksSection";
@@ -133,10 +134,20 @@ const expenseCategoriesData = {
 };
 
 const Dashboard = () => {
-  const [checked, setChecked] = useState([false, false, false, false, false]);
+  // Load checkbox states from localStorage or default to all false
+  const [checked, setChecked] = useState(() => {
+    const saved = localStorage.getItem('onboarding-checked');
+    return saved ? JSON.parse(saved) : [false, false, false, false, false];
+  });
+  
   const [graphRange, setGraphRange] = useState<"6m" | "12m" | "2y" | "3y">("6m");
   const [expenseTimePeriod, setExpenseTimePeriod] = useState<"1m" | "6m" | "12m">("1m");
   const navigate = useNavigate();
+
+  // Save checkbox states to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('onboarding-checked', JSON.stringify(checked));
+  }, [checked]);
 
   const handleCardClick = (link: string) => {
     navigate(link);
