@@ -74,7 +74,7 @@ const TransactionCategorization = () => {
 
   // Calculate points (1 point for each categorized transaction)
   const categorizedCount = transactions.filter(t => t.category !== "Uncategorized").length;
-  const totalPoints = categorizedCount;
+  const totalTransactions = transactions.length;
 
   // Get current page transactions
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -89,7 +89,7 @@ const TransactionCategorization = () => {
           <div className="flex justify-between items-center">
             <CardTitle>Transaction Categorization</CardTitle>
             <div className="bg-green-100 text-green-800 px-4 py-2 rounded-lg font-semibold">
-              🏆 {totalPoints} Points Earned
+              🏆 {categorizedCount} Points Earned out of {totalTransactions} Total
             </div>
           </div>
           <p className="text-sm text-gray-600">
