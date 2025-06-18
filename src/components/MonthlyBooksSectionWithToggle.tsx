@@ -74,6 +74,10 @@ const MonthlyBooksSectionWithToggle = (props: MonthlyBooksSectionWithToggleProps
           onCashflowClick={() => handleFinancialStatementClick("cashflow")}
           onBalanceSheetClick={() => handleFinancialStatementClick("balance-sheet")}
           onProfitLossClick={() => handleFinancialStatementClick("profit-loss")}
+          uncategorizedTransactions={props.uncategorizedTransactions}
+          onReviewClick={props.onReviewClick}
+          recentInboxMessages={props.recentInboxMessages}
+          onInboxClick={props.onInboxClick}
         />
       )}
       
