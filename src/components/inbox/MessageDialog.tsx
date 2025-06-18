@@ -34,7 +34,7 @@ const MessageDialog = ({ children, message, onSendReply }: MessageDialogProps) =
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="w-[95vw] max-w-[95vw] max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <div className={`p-2 rounded-full ${getMessageTypeColor(message.type)}`}>
