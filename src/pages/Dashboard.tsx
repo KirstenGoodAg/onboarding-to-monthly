@@ -1,8 +1,9 @@
+
 import DashboardHeader from "../components/DashboardHeader";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import OnboardingSection from "../components/OnboardingSection";
-import MonthlyBooksSection from "../components/MonthlyBooksSection";
+import MonthlyBooksSectionWithToggle from "../components/MonthlyBooksSectionWithToggle";
 import TransactionCategorization from "../components/TransactionCategorization";
 
 // Step data for onboarding
@@ -186,7 +187,7 @@ const Dashboard = () => {
           
           {/* Monthly Books Section - show only when all onboarding complete */}
           {onboardingComplete && (
-            <MonthlyBooksSection
+            <MonthlyBooksSectionWithToggle
               glanceStats={glanceStats}
               dataMap={dataMap}
               graphRange={graphRange}
@@ -199,7 +200,6 @@ const Dashboard = () => {
               expenseCategories={expenseCategoriesData[expenseTimePeriod]}
               expenseTimePeriod={expenseTimePeriod}
               onExpenseTimePeriodChange={setExpenseTimePeriod}
-              showTransactionCategorization={false}
             />
           )}
         </div>
