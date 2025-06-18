@@ -221,20 +221,20 @@ const Inbox = () => {
                           View & Reply
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-2xl">
+                      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                         <DialogHeader>
                           <DialogTitle className="flex items-center gap-2">
                             <div className={`p-2 rounded-full ${getMessageTypeColor(message.type)}`}>
                               {getMessageIcon(message.type)}
                             </div>
-                            {message.subject}
+                            <span className="break-words">{message.subject}</span>
                           </DialogTitle>
                         </DialogHeader>
                         <div className="space-y-4">
                           <div className="bg-gray-50 p-4 rounded-lg">
-                            <div className="text-sm font-medium mb-1">{message.from}</div>
+                            <div className="text-sm font-medium mb-1 break-words">{message.from}</div>
                             <div className="text-xs text-gray-500 mb-3">{message.date} at {message.time}</div>
-                            <div className="text-sm whitespace-pre-wrap">{message.content}</div>
+                            <div className="text-sm break-words whitespace-pre-wrap leading-relaxed">{message.content}</div>
                           </div>
                           
                           <div className="border-t pt-4">
@@ -275,13 +275,13 @@ const Inbox = () => {
                                 <p className="text-sm font-medium mb-2">Attached Files:</p>
                                 <div className="space-y-1">
                                   {attachedFiles.map((file, index) => (
-                                    <div key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded text-sm">
-                                      <span>{file.name}</span>
+                                    <div key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded text-sm break-all">
+                                      <span className="truncate pr-2">{file.name}</span>
                                       <Button
                                         variant="ghost"
                                         size="sm"
                                         onClick={() => removeFile(index)}
-                                        className="h-6 w-6 p-0"
+                                        className="h-6 w-6 p-0 flex-shrink-0"
                                       >
                                         ×
                                       </Button>
