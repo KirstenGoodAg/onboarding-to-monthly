@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import OnboardingSection from "../components/OnboardingSection";
 import MonthlyBooksSection from "../components/MonthlyBooksSection";
+import TransactionCategorization from "../components/TransactionCategorization";
 
 // Step data for onboarding
 const onboardingCards = [
@@ -162,8 +163,9 @@ const Dashboard = () => {
   // All onboarding complete?
   const onboardingComplete = totalChecked === onboardingCards.length;
 
-  // Check if "Schedule your onboarding call" (index 3) is checked
-  const showTransactionCategorization = checked[3]; // 4th item (index 3) is "Schedule your onboarding call"
+  // Check if first 4 boxes are checked but not all 5
+  const firstFourChecked = checked.slice(0, 4).every(Boolean);
+  const showTransactionCategorization = firstFourChecked && !onboardingComplete;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-transparent">
@@ -176,6 +178,13 @@ const Dashboard = () => {
             onCheckboxChange={handleCheckboxChange}
             onCardClick={handleCardClick}
           />
+          
+          {/* Transaction Categorization Section - show when first 4 boxes checked but not all 5 */}
+          {showTransactionCategorization && (
+            <TransactionCategorization />
+          )}
+          
+          {/* Monthly Books Section - show only when all onboarding complete */}
           {onboardingComplete && (
             <MonthlyBooksSection
               glanceStats={glanceStats}
@@ -190,7 +199,7 @@ const Dashboard = () => {
               expenseCategories={expenseCategoriesData[expenseTimePeriod]}
               expenseTimePeriod={expenseTimePeriod}
               onExpenseTimePeriodChange={setExpenseTimePeriod}
-              showTransactionCategorization={showTransactionCategorization}
+              showTransactionCategorization={false}
             />
           )}
         </div>
