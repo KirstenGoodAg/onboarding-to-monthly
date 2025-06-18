@@ -1,6 +1,8 @@
 
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Triangle } from "lucide-react";
+import { useState } from "react";
 
 type OnboardingCard = {
   label: string;
@@ -22,13 +24,28 @@ const OnboardingSection = ({
 }: OnboardingSectionProps) => {
   // Check if all onboarding is complete
   const onboardingComplete = checked.every(Boolean);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <div>
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 pl-2">
-        Onboarding
-      </h2>
-      {!onboardingComplete && (
+      <div 
+        className="flex items-center cursor-pointer mb-2 pl-2"
+        onClick={() => onboardingComplete && setIsExpanded(!isExpanded)}
+      >
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+          Onboarding
+        </h2>
+        {onboardingComplete && (
+          <Triangle 
+            size={16} 
+            className={`ml-2 transition-transform duration-200 ${
+              isExpanded ? 'rotate-180' : 'rotate-90'
+            }`}
+          />
+        )}
+      </div>
+      
+      {(!onboardingComplete || isExpanded) && (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {cards.slice(0, 4).map((card, idx) => (
