@@ -40,14 +40,14 @@ const MessageDialog = ({ children, message, onSendReply }: MessageDialogProps) =
             <div className={`p-2 rounded-full ${getMessageTypeColor(message.type)}`}>
               {getMessageIcon(message.type)}
             </div>
-            <span className="break-words">{message.subject}</span>
+            <span className="break-words overflow-hidden">{message.subject}</span>
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="bg-gray-50 p-4 rounded-lg">
-            <div className="text-sm font-medium mb-1 break-words">{message.from}</div>
+            <div className="text-sm font-medium mb-1 break-words overflow-hidden">{message.from}</div>
             <div className="text-xs text-gray-500 mb-3">{message.date} at {message.time}</div>
-            <div className="text-sm break-words whitespace-pre-wrap leading-relaxed">{message.content}</div>
+            <div className="text-sm break-words whitespace-pre-wrap leading-relaxed overflow-wrap-anywhere word-break-break-word">{message.content}</div>
           </div>
           
           <ReplyForm onSendReply={onSendReply} />
