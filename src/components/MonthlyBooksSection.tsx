@@ -4,6 +4,7 @@ import RevenueChartCard from "./RevenueChartCard";
 import NeedsAttentionCard from "./NeedsAttentionCard";
 import InboxCard from "./InboxCard";
 import ExpensesCard from "./ExpensesCard";
+import TransactionCategorization from "./TransactionCategorization";
 
 interface MonthlyBooksSectionProps {
   glanceStats: { label: string; value: string }[];
@@ -18,6 +19,7 @@ interface MonthlyBooksSectionProps {
   expenseCategories: { name: string; value: number; color: string }[];
   expenseTimePeriod: "1m" | "6m" | "12m";
   onExpenseTimePeriodChange: (period: "1m" | "6m" | "12m") => void;
+  showTransactionCategorization: boolean;
 }
 
 const MonthlyBooksSection = ({
@@ -33,6 +35,7 @@ const MonthlyBooksSection = ({
   expenseCategories,
   expenseTimePeriod,
   onExpenseTimePeriodChange,
+  showTransactionCategorization,
 }: MonthlyBooksSectionProps) => (
   <div className="flex flex-col items-center mt-10 w-full">
     <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-left w-full pl-2">
@@ -52,6 +55,11 @@ const MonthlyBooksSection = ({
           <InboxCard recentInboxMessages={recentInboxMessages} onInboxClick={onInboxClick} />
         </div>
       </div>
+      
+      {/* Transaction Categorization Section - only show when onboarding call is scheduled */}
+      {showTransactionCategorization && (
+        <TransactionCategorization />
+      )}
       
       {/* Bottom Row: Full Width Expenses Card */}
       <ExpensesCard

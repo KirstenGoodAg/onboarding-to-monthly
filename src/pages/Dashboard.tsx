@@ -1,4 +1,3 @@
-
 import DashboardHeader from "../components/DashboardHeader";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -163,6 +162,9 @@ const Dashboard = () => {
   // All onboarding complete?
   const onboardingComplete = totalChecked === onboardingCards.length;
 
+  // Check if "Schedule your onboarding call" (index 3) is checked
+  const showTransactionCategorization = checked[3]; // 4th item (index 3) is "Schedule your onboarding call"
+
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-transparent">
       <DashboardHeader onboardingCheckedCount={totalChecked} />
@@ -188,6 +190,7 @@ const Dashboard = () => {
               expenseCategories={expenseCategoriesData[expenseTimePeriod]}
               expenseTimePeriod={expenseTimePeriod}
               onExpenseTimePeriodChange={setExpenseTimePeriod}
+              showTransactionCategorization={showTransactionCategorization}
             />
           )}
         </div>
