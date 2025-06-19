@@ -1,9 +1,9 @@
-
 import GlanceStatsCard from "./GlanceStatsCard";
 import RevenueChartCard from "./RevenueChartCard";
 import NeedsAttentionCard from "./NeedsAttentionCard";
 import InboxCard from "./InboxCard";
 import ExpensesCard from "./ExpensesCard";
+import ShopifyBanner from "./ShopifyBanner";
 
 interface MonthlyBooksSectionProps {
   glanceStats: { label: string; value: string }[];
@@ -39,6 +39,7 @@ const MonthlyBooksSection = ({
     <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-left w-full pl-2">
       Your Monthly Books
     </h2>
+    <ShopifyBanner />
     <div className="w-full flex flex-col gap-6">
       {/* Top Row: Numbers & Graph with Sidebar Cards */}
       <div className="w-full flex flex-col lg:flex-row gap-6">

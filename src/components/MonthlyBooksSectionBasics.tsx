@@ -1,9 +1,9 @@
-
 import { Card, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, TrendingUp, DollarSign } from "lucide-react";
 import NeedsAttentionCard from "./NeedsAttentionCard";
 import InboxCard from "./InboxCard";
+import ShopifyBanner from "./ShopifyBanner";
 
 interface MonthlyBooksSectionBasicsProps {
   onCashflowClick: () => void;
@@ -28,6 +28,7 @@ const MonthlyBooksSectionBasics = ({
     <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-left w-full pl-2">
       Your Monthly Books - Basics
     </h2>
+    <ShopifyBanner />
     <div className="w-full flex flex-col gap-6">
       {/* Top Row: Financial Statement Cards with Sidebar Cards */}
       <div className="w-full flex flex-col lg:flex-row gap-6">
