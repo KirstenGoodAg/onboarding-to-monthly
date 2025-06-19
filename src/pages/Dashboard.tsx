@@ -158,6 +158,10 @@ const Dashboard = () => {
     setChecked((prev) => prev.map((val, i) => (i === idx ? checkedVal : val)));
   };
 
+  const handleResetOnboarding = () => {
+    setChecked([false, false, false, false, false]);
+  };
+
   // Count total checked cards
   const totalChecked = checked.filter(Boolean).length;
 
@@ -170,7 +174,10 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-transparent">
-      <DashboardHeader onboardingCheckedCount={totalChecked} />
+      <DashboardHeader 
+        onboardingCheckedCount={totalChecked} 
+        onResetOnboarding={handleResetOnboarding}
+      />
       <div className="flex flex-1 w-full justify-center items-start">
         <div className="grid grid-cols-1 w-full max-w-4xl px-2 py-8 gap-6">
           <OnboardingSection
