@@ -1,9 +1,8 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Search, FileExport } from "lucide-react";
+import { Search, FileText } from "lucide-react";
 
 interface SearchFilters {
   searchTerm: string;
@@ -60,7 +59,7 @@ const TransactionSearch = ({
               Clear Filters
             </Button>
             <Button onClick={onExport} className="flex items-center gap-2">
-              <FileExport className="h-4 w-4" />
+              <FileText className="h-4 w-4" />
               Export Results ({resultsCount})
             </Button>
           </div>
