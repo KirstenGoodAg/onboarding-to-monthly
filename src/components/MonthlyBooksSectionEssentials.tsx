@@ -4,6 +4,7 @@ import NeedsAttentionCard from "./NeedsAttentionCard";
 import InboxCard from "./InboxCard";
 import ExpensesCard from "./ExpensesCard";
 import ShopifyBanner from "./ShopifyBanner";
+import { Button } from "@/components/ui/button";
 
 interface MonthlyBooksSectionEssentialsProps {
   glanceStats: { label: string; value: string }[];
@@ -33,36 +34,48 @@ const MonthlyBooksSectionEssentials = ({
   expenseCategories,
   expenseTimePeriod,
   onExpenseTimePeriodChange,
-}: MonthlyBooksSectionEssentialsProps) => (
-  <div className="flex flex-col items-center mt-10 w-full">
-    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-left w-full pl-2">
-      Your Monthly Books - Essentials
-    </h2>
-    <ShopifyBanner />
-    <div className="w-full flex flex-col gap-6">
-      {/* Top Row: Numbers & Graph with Sidebar Cards */}
-      <div className="w-full flex flex-col lg:flex-row gap-6">
-        {/* Left (75%): Numbers & Graph */}
-        <div className="w-full lg:w-3/4 flex flex-col gap-6">
-          <GlanceStatsCard glanceStats={glanceStats} />
-          <RevenueChartCard dataMap={dataMap} graphRange={graphRange} setGraphRange={setGraphRange} />
-        </div>
-        {/* Right (25%): Needs Attention and Inbox Cards */}
-        <div className="w-full lg:w-1/4 flex flex-col gap-6">
-          <NeedsAttentionCard uncategorizedTransactions={uncategorizedTransactions} onReviewClick={onReviewClick} />
-          <InboxCard recentInboxMessages={recentInboxMessages} onInboxClick={onInboxClick} />
-        </div>
+}: MonthlyBooksSectionEssentialsProps) => {
+  const handleMeetWithAdvisor = () => {
+    console.log("Navigate to advisor meeting");
+    // TODO: Implement advisor meeting functionality
+  };
+
+  return (
+    <div className="flex flex-col items-center mt-10 w-full">
+      <div className="flex justify-between items-center w-full mb-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 pl-2">
+          Your Monthly Books - Essentials
+        </h2>
+        <Button onClick={handleMeetWithAdvisor} className="mr-2">
+          Meet with Advisor
+        </Button>
       </div>
-      
-      {/* Bottom Row: Full Width Expenses Card */}
-      <ExpensesCard
-        recentExpenses={recentExpenses}
-        expenseCategories={expenseCategories}
-        timePeriod={expenseTimePeriod}
-        onTimePeriodChange={onExpenseTimePeriodChange}
-      />
+      <ShopifyBanner />
+      <div className="w-full flex flex-col gap-6">
+        {/* Top Row: Numbers & Graph with Sidebar Cards */}
+        <div className="w-full flex flex-col lg:flex-row gap-6">
+          {/* Left (75%): Numbers & Graph */}
+          <div className="w-full lg:w-3/4 flex flex-col gap-6">
+            <GlanceStatsCard glanceStats={glanceStats} />
+            <RevenueChartCard dataMap={dataMap} graphRange={graphRange} setGraphRange={setGraphRange} />
+          </div>
+          {/* Right (25%): Needs Attention and Inbox Cards */}
+          <div className="w-full lg:w-1/4 flex flex-col gap-6">
+            <NeedsAttentionCard uncategorizedTransactions={uncategorizedTransactions} onReviewClick={onReviewClick} />
+            <InboxCard recentInboxMessages={recentInboxMessages} onInboxClick={onInboxClick} />
+          </div>
+        </div>
+        
+        {/* Bottom Row: Full Width Expenses Card */}
+        <ExpensesCard
+          recentExpenses={recentExpenses}
+          expenseCategories={expenseCategories}
+          timePeriod={expenseTimePeriod}
+          onTimePeriodChange={onExpenseTimePeriodChange}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default MonthlyBooksSectionEssentials;
