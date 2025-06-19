@@ -1,4 +1,3 @@
-
 import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -66,13 +65,13 @@ const Sidebar = () => {
       alt: "Transactions",
       id: "transactions",
     }] : []),
-    {
+    ...(onboardingComplete ? [{
       label: "Reports",
       to: "/reports",
       img: "https://goodagriculture.com/wp-content/uploads/2025/05/reports-icon.png",
       alt: "Reports",
       id: "reports",
-    },
+    }] : []),
     {
       label: "Inbox",
       to: "/inbox",
