@@ -1,10 +1,10 @@
-
 import GlanceStatsCard from "./GlanceStatsCard";
 import RevenueChartCard from "./RevenueChartCard";
 import NeedsAttentionCard from "./NeedsAttentionCard";
 import InboxCard from "./InboxCard";
 import ExpensesCard from "./ExpensesCard";
 import { Card, CardTitle } from "@/components/ui/card";
+import ShopifyBanner from "./ShopifyBanner";
 
 interface MonthlyBooksSectionPremiumProps {
   glanceStats: { label: string; value: string }[];
@@ -39,6 +39,7 @@ const MonthlyBooksSectionPremium = ({
     <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-left w-full pl-2">
       Your Monthly Books - Premium
     </h2>
+    <ShopifyBanner />
     
     {/* Enterprise Selection */}
     <Card className="w-full p-4 mb-6">
