@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -28,6 +29,8 @@ const TransactionSearch = ({
   categoryOptions,
   resultsCount
 }: TransactionSearchProps) => {
+  console.log("TransactionSearch component rendering", { filters, resultsCount });
+
   const handleInputChange = (field: keyof SearchFilters, value: string) => {
     onFiltersChange({
       ...filters,
@@ -47,10 +50,10 @@ const TransactionSearch = ({
   };
 
   return (
-    <Card className="mb-6">
+    <Card className="mb-6 border-2 border-blue-200 bg-white shadow-lg">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold flex items-center gap-2">
+          <h3 className="text-lg font-semibold flex items-center gap-2 text-blue-700">
             <Search className="h-5 w-5" />
             Search & Filter Transactions
           </h3>
