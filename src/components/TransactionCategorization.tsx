@@ -1,8 +1,8 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -72,9 +72,10 @@ const TransactionCategorization = () => {
     );
   };
 
-  // Calculate points (1 point for each categorized transaction)
+  // Calculate progress (percentage of categorized transactions)
   const categorizedCount = transactions.filter(t => t.category !== "Uncategorized").length;
   const totalTransactions = transactions.length;
+  const progressPercentage = (categorizedCount / totalTransactions) * 100;
 
   // Get current page transactions
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -88,12 +89,18 @@ const TransactionCategorization = () => {
         <CardHeader>
           <div className="flex justify-between items-center">
             <CardTitle>Transaction Categorization</CardTitle>
-            <div className="bg-green-100 text-green-800 px-4 py-2 rounded-lg font-semibold">
-              🏆 {categorizedCount} Points Earned out of {totalTransactions} Total
+            <div className="flex flex-col items-end min-w-[200px]">
+              <div className="text-sm text-gray-600 mb-2">
+                {categorizedCount} of {totalTransactions} transactions categorized
+              </div>
+              <Progress value={progressPercentage} className="w-[200px]" />
+              <div className="text-xs text-gray-500 mt-1">
+                {Math.round(progressPercentage)}% complete
+              </div>
             </div>
           </div>
           <p className="text-sm text-gray-600">
-            Categorize your transactions to earn points! You earn 1 point for each transaction you categorize.
+            Categorize your transactions to track your progress toward completion.
           </p>
         </CardHeader>
         <CardContent>
