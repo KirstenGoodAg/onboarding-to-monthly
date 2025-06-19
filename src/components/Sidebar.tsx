@@ -67,6 +67,13 @@ const Sidebar = () => {
       id: "transactions",
     }] : []),
     {
+      label: "Reports",
+      to: "/reports",
+      img: "https://goodagriculture.com/wp-content/uploads/2025/05/reports-icon.png",
+      alt: "Reports",
+      id: "reports",
+    },
+    {
       label: "Inbox",
       to: "/inbox",
       img: "https://goodagriculture.com/wp-content/uploads/2025/05/mail.png",
