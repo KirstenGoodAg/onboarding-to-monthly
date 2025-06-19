@@ -1,9 +1,9 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import TransactionSearch from "@/components/TransactionSearch";
 
 // Sample transaction data with realistic names
 const sampleTransactions = [
@@ -29,9 +29,26 @@ const categoryOptions = [
   "Other"
 ];
 
+interface SearchFilters {
+  searchTerm: string;
+  category: string;
+  minAmount: string;
+  maxAmount: string;
+  startDate: string;
+  endDate: string;
+}
+
 const Transactions = () => {
   const [transactions, setTransactions] = useState(sampleTransactions);
   const [filter, setFilter] = useState("all");
+  const [searchFilters, setSearchFilters] = useState<SearchFilters>({
+    searchTerm: "",
+    category: "all",
+    minAmount: "",
+    maxAmount: "",
+    startDate: "",
+    endDate: ""
+  });
 
   const handleCategoryChange = (transactionId: number, newCategory: string) => {
     setTransactions(prev => 
@@ -53,11 +70,66 @@ const Transactions = () => {
     );
   };
 
-  const filteredTransactions = transactions.filter(t => 
-    filter === "all" || (filter === "uncategorized" && t.category === "Uncategorized")
-  );
+  const applyFilters = (transactions: typeof sampleTransactions) => {
+    return transactions.filter(t => {
+      // Basic filter (all or uncategorized)
+      const passesBasicFilter = filter === "all" || (filter === "uncategorized" && t.category === "Uncategorized");
+      
+      // Search term filter
+      const passesSearchTerm = !searchFilters.searchTerm || 
+        t.name.toLowerCase().includes(searchFilters.searchTerm.toLowerCase());
+      
+      // Category filter
+      const passesCategoryFilter = searchFilters.category === "all" || 
+        t.category === searchFilters.category;
+      
+      // Amount range filter
+      const amount = Math.abs(t.amount);
+      const passesMinAmount = !searchFilters.minAmount || 
+        amount >= parseFloat(searchFilters.minAmount);
+      const passesMaxAmount = !searchFilters.maxAmount || 
+        amount <= parseFloat(searchFilters.maxAmount);
+      
+      // Date range filter
+      const transactionDate = new Date(t.date);
+      const passesStartDate = !searchFilters.startDate || 
+        transactionDate >= new Date(searchFilters.startDate);
+      const passesEndDate = !searchFilters.endDate || 
+        transactionDate <= new Date(searchFilters.endDate);
+      
+      return passesBasicFilter && passesSearchTerm && passesCategoryFilter && 
+             passesMinAmount && passesMaxAmount && passesStartDate && passesEndDate;
+    });
+  };
 
+  const filteredTransactions = applyFilters(transactions);
   const uncategorizedCount = transactions.filter(t => t.category === "Uncategorized").length;
+
+  const handleExport = () => {
+    const csvHeaders = ['Date', 'Name', 'Amount', 'Category', 'Notes'];
+    const csvData = filteredTransactions.map(t => [
+      t.date,
+      `"${t.name}"`,
+      t.amount.toString(),
+      t.category,
+      `"${t.notes}"`
+    ]);
+    
+    const csvContent = [
+      csvHeaders.join(','),
+      ...csvData.map(row => row.join(','))
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `transactions_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-gray-50">
@@ -69,6 +141,14 @@ const Transactions = () => {
               Review and categorize your transactions. You have {uncategorizedCount} uncategorized transactions.
             </p>
           </div>
+
+          <TransactionSearch 
+            filters={searchFilters}
+            onFiltersChange={setSearchFilters}
+            onExport={handleExport}
+            categoryOptions={categoryOptions}
+            resultsCount={filteredTransactions.length}
+          />
 
           <div className="mb-6">
             <Select value={filter} onValueChange={setFilter}>
@@ -84,7 +164,7 @@ const Transactions = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Transactions</CardTitle>
+              <CardTitle>Transactions ({filteredTransactions.length} results)</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
