@@ -1,13 +1,11 @@
 
 import { useState, useEffect } from 'react';
 import MessageListItem from '../components/inbox/MessageListItem';
-import MessageDialog from '../components/inbox/MessageDialog';
 import { sampleMessages } from '../components/inbox/sampleMessages';
-import { Message } from '../components/inbox/MessageListItem';
+import { Message, Reply } from '../components/inbox/MessageListItem';
 
 const Inbox = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
 
   // Load messages from localStorage and combine with sample messages
   useEffect(() => {
@@ -42,13 +40,31 @@ const Inbox = () => {
     ));
   };
 
-  const handleSendReply = (replyText: string, attachedFiles: File[]) => {
-    console.log('Sending reply:', replyText);
-    console.log('Attached files:', attachedFiles);
+  const handleSendReply = (messageId: number, replyContent: string) => {
+    const now = new Date();
+    const newReply: Reply = {
+      id: Date.now(),
+      content: replyContent,
+      from: 'You',
+      date: now.toLocaleDateString(),
+      time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+
+    setMessages(prev => prev.map(msg => {
+      if (msg.id === messageId) {
+        return {
+          ...msg,
+          replies: [...(msg.replies || []), newReply]
+        };
+      }
+      return msg;
+    }));
+
+    console.log('Reply sent:', { messageId, replyContent });
   };
 
   const handleViewMessage = (message: Message) => {
-    setSelectedMessage(message);
+    console.log('Viewing message:', message);
   };
 
   return (
@@ -57,22 +73,18 @@ const Inbox = () => {
         <h1 className="text-3xl font-bold mb-2">Inbox</h1>
         <p className="text-gray-600 mb-6">Messages and communications with your farm advisor</p>
         
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           {messages.length === 0 ? (
             <div className="h-12 rounded bg-gray-100 px-4 flex items-center text-gray-500">No messages yet.</div>
           ) : (
             messages.map(message => (
-              <MessageDialog
+              <MessageListItem
                 key={message.id}
                 message={message}
+                onViewMessage={handleViewMessage}
+                onMarkAsRead={markAsRead}
                 onSendReply={handleSendReply}
-              >
-                <MessageListItem
-                  message={message}
-                  onViewMessage={handleViewMessage}
-                  onMarkAsRead={markAsRead}
-                />
-              </MessageDialog>
+              />
             ))
           )}
         </div>

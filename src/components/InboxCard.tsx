@@ -2,8 +2,15 @@
 import { useState, useEffect } from "react";
 import { Card, CardTitle } from "@/components/ui/card";
 
+interface InboxMessage {
+  id: number;
+  subject: string;
+  date: string;
+  replies?: { id: number; content: string; from: string; date: string; time: string }[];
+}
+
 interface InboxCardProps {
-  recentInboxMessages: { id: number; subject: string; date: string }[];
+  recentInboxMessages: InboxMessage[];
   onInboxClick: () => void;
 }
 
@@ -11,7 +18,7 @@ const InboxCard = ({
   recentInboxMessages,
   onInboxClick,
 }: InboxCardProps) => {
-  const [allMessages, setAllMessages] = useState<{ id: number; subject: string; date: string }[]>([]);
+  const [allMessages, setAllMessages] = useState<InboxMessage[]>([]);
 
   // Load messages from localStorage
   useEffect(() => {
@@ -53,7 +60,14 @@ const InboxCard = ({
               className="flex flex-col cursor-pointer px-2 py-1 rounded hover:bg-indigo-50 transition"
               onClick={onInboxClick}
             >
-              <span className="truncate pr-2 font-medium text-gray-800 text-sm">{msg.subject}</span>
+              <div className="flex items-center justify-between">
+                <span className="truncate pr-2 font-medium text-gray-800 text-sm">{msg.subject}</span>
+                {msg.replies && msg.replies.length > 0 && (
+                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full flex-shrink-0">
+                    {msg.replies.length}
+                  </span>
+                )}
+              </div>
               <span className="text-xs text-gray-500">{msg.date}</span>
             </li>
           ))}
