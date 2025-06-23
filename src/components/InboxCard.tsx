@@ -24,7 +24,20 @@ const InboxCard = ({
   useEffect(() => {
     const loadMessages = () => {
       const savedMessages = JSON.parse(localStorage.getItem('inboxMessages') || '[]');
-      const combinedMessages = [...savedMessages, ...recentInboxMessages];
+      const savedReplies = JSON.parse(localStorage.getItem('messageReplies') || '{}');
+      
+      // Merge sample messages with any saved replies
+      const messagesWithReplies = recentInboxMessages.map(msg => ({
+        ...msg,
+        replies: savedReplies[msg.id] || msg.replies || []
+      }));
+      
+      // Add any completely new messages from localStorage
+      const newMessages = savedMessages.filter((saved: InboxMessage) => 
+        !recentInboxMessages.some(sample => sample.id === saved.id)
+      );
+      
+      const combinedMessages = [...newMessages, ...messagesWithReplies];
       setAllMessages(combinedMessages);
     };
 

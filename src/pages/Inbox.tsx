@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import MessageListItem from '../components/inbox/MessageListItem';
 import { sampleMessages } from '../components/inbox/sampleMessages';
@@ -11,7 +10,20 @@ const Inbox = () => {
   useEffect(() => {
     const loadMessages = () => {
       const savedMessages = JSON.parse(localStorage.getItem('inboxMessages') || '[]');
-      const combinedMessages = [...savedMessages, ...sampleMessages];
+      const savedReplies = JSON.parse(localStorage.getItem('messageReplies') || '{}');
+      
+      // Merge sample messages with any saved replies
+      const messagesWithReplies = sampleMessages.map(msg => ({
+        ...msg,
+        replies: savedReplies[msg.id] || msg.replies || []
+      }));
+      
+      // Add any completely new messages from localStorage
+      const newMessages = savedMessages.filter((saved: Message) => 
+        !sampleMessages.some(sample => sample.id === saved.id)
+      );
+      
+      const combinedMessages = [...newMessages, ...messagesWithReplies];
       setMessages(combinedMessages);
     };
 
@@ -40,7 +52,7 @@ const Inbox = () => {
         msg.id === messageId ? { ...msg, read: true } : msg
       );
       
-      // Save to localStorage
+      // Save to localStorage - only save non-sample messages
       const savedMessages = updated.filter(msg => !sampleMessages.some(sample => sample.id === msg.id));
       localStorage.setItem('inboxMessages', JSON.stringify(savedMessages));
       
@@ -69,7 +81,15 @@ const Inbox = () => {
         return msg;
       });
 
-      // Save to localStorage - only save non-sample messages
+      // Save replies separately to preserve them across reloads
+      const currentReplies = JSON.parse(localStorage.getItem('messageReplies') || '{}');
+      const updatedMessage = updated.find(msg => msg.id === messageId);
+      if (updatedMessage) {
+        currentReplies[messageId] = updatedMessage.replies;
+        localStorage.setItem('messageReplies', JSON.stringify(currentReplies));
+      }
+
+      // Also save non-sample messages as before
       const savedMessages = updated.filter(msg => !sampleMessages.some(sample => sample.id === msg.id));
       localStorage.setItem('inboxMessages', JSON.stringify(savedMessages));
       
