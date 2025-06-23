@@ -6,7 +6,7 @@ import MonthlyBooksSectionEssentials from "./MonthlyBooksSectionEssentials";
 import MonthlyBooksSectionPremium from "./MonthlyBooksSectionPremium";
 
 interface MonthlyBooksSectionWithToggleProps {
-  glanceStats: { label: string; value: string }[];
+  glanceStats: { label: string; value: string; explanation: string }[];
   glanceTimePeriod: string;
   onGlanceTimePeriodChange: (period: string) => void;
   dataMap: Record<string, any[]>;

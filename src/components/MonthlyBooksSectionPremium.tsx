@@ -9,7 +9,7 @@ import ShopifyBanner from "./ShopifyBanner";
 import { Button } from "@/components/ui/button";
 
 interface MonthlyBooksSectionPremiumProps {
-  glanceStats: { label: string; value: string }[];
+  glanceStats: { label: string; value: string; explanation: string }[];
   glanceTimePeriod: string;
   onGlanceTimePeriodChange: (period: string) => void;
   dataMap: Record<string, any[]>;

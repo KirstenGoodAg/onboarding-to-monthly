@@ -7,7 +7,7 @@ import ExpensesCard from "./ExpensesCard";
 import ShopifyBanner from "./ShopifyBanner";
 
 interface MonthlyBooksSectionProps {
-  glanceStats: { label: string; value: string }[];
+  glanceStats: { label: string; value: string; explanation: string }[];
   glanceTimePeriod: string;
   onGlanceTimePeriodChange: (period: string) => void;
   dataMap: Record<string, any[]>;
