@@ -1,4 +1,3 @@
-
 import DashboardHeader from "../components/DashboardHeader";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -97,16 +96,16 @@ const recentInboxMessages = [
 
 // Sample expense data
 const recentExpenses = [
-  { id: 1, description: "Fertilizer Purchase", amount: 276.79, category: "Supplies", date: "2025-05-28" },
-  { id: 2, description: "Tractor Fuel", amount: 116.42, category: "Fuel", date: "2025-05-27" },
-  { id: 3, description: "Seed Purchase", amount: 445.23, category: "Supplies", date: "2025-05-26" },
-  { id: 4, description: "Equipment Repair", amount: 530.12, category: "Maintenance", date: "2025-05-25" },
-  { id: 5, description: "Irrigation Equipment", amount: 892.45, category: "Equipment", date: "2025-05-24" },
-  { id: 6, description: "Pesticide Application", amount: 234.67, category: "Supplies", date: "2025-05-23" },
-  { id: 7, description: "Labor Costs", amount: 1200.00, category: "Labor", date: "2025-05-22" },
-  { id: 8, description: "Insurance Payment", amount: 345.88, category: "Insurance", date: "2025-05-21" },
-  { id: 9, description: "Vehicle Maintenance", amount: 189.33, category: "Maintenance", date: "2025-05-20" },
-  { id: 10, description: "Office Supplies", amount: 67.45, category: "Office", date: "2025-05-19" },
+  { id: 1, description: "Fertilizer Purchase", amount: 276.79, category: "Supplies", date: "2025-05-28", bankAccount: "Farm Operating" },
+  { id: 2, description: "Tractor Fuel", amount: 116.42, category: "Fuel", date: "2025-05-27", bankAccount: "Farm Operating" },
+  { id: 3, description: "Seed Purchase", amount: 445.23, category: "Supplies", date: "2025-05-26", bankAccount: "Farm Operating" },
+  { id: 4, description: "Equipment Repair", amount: 530.12, category: "Maintenance", date: "2025-05-25", bankAccount: "Farm Operating" },
+  { id: 5, description: "Irrigation Equipment", amount: 892.45, category: "Equipment", date: "2025-05-24", bankAccount: "Savings" },
+  { id: 6, description: "Pesticide Application", amount: 234.67, category: "Supplies", date: "2025-05-23", bankAccount: "Farm Operating" },
+  { id: 7, description: "Labor Costs", amount: 1200.00, category: "Labor", date: "2025-05-22", bankAccount: "Farm Operating" },
+  { id: 8, description: "Insurance Payment", amount: 345.88, category: "Insurance", date: "2025-05-21", bankAccount: "Savings" },
+  { id: 9, description: "Vehicle Maintenance", amount: 189.33, category: "Maintenance", date: "2025-05-20", bankAccount: "Farm Operating" },
+  { id: 10, description: "Office Supplies", amount: 67.45, category: "Office", date: "2025-05-19", bankAccount: "Farm Operating" },
 ];
 
 const expenseCategoriesData = {

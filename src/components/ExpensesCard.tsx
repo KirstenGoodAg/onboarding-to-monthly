@@ -9,6 +9,7 @@ interface Expense {
   amount: number;
   category: string;
   date: string;
+  bankAccount: string;
 }
 
 interface ExpenseCategory {
@@ -55,7 +56,7 @@ const ExpensesCard = ({
                 <div key={expense.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                   <div className="flex-1">
                     <p className="font-medium text-sm">{expense.description}</p>
-                    <p className="text-xs text-gray-500">{expense.category} • {expense.date}</p>
+                    <p className="text-xs text-gray-500">{expense.category} • {expense.date} • {expense.bankAccount}</p>
                   </div>
                   <div className="text-right">
                     <p className="font-semibold text-red-600">-${expense.amount.toFixed(2)}</p>
