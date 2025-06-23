@@ -2,19 +2,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import TransactionSearch from "@/components/TransactionSearch";
 
-// Sample transaction data with realistic names
+// Sample transaction data with realistic names and bank account info
 const sampleTransactions = [
-  { id: 1, name: "Randy's Repair Service", amount: -530.12, date: "2025-05-20", category: "Uncategorized", notes: "" },
-  { id: 2, name: "AgriSupply Co.", amount: -276.79, date: "2025-05-19", category: "Uncategorized", notes: "" },
-  { id: 3, name: "Shell 3871253", amount: -116.42, date: "2025-05-17", category: "Uncategorized", notes: "" },
-  { id: 4, name: "Midwest Seed Supply", amount: -445.23, date: "2025-05-15", category: "Uncategorized", notes: "" },
-  { id: 5, name: "Farm Bureau Insurance", amount: -345.88, date: "2025-05-14", category: "Uncategorized", notes: "" },
-  { id: 6, name: "Harvest Gold Elevator", amount: 2150.00, date: "2025-05-13", category: "Uncategorized", notes: "" },
-  { id: 7, name: "Venmo: Jorge Zamp...", amount: -1200.00, date: "2025-05-12", category: "Uncategorized", notes: "" },
-  { id: 8, name: "Tractor Supply Co #4821", amount: -425.50, date: "2025-05-10", category: "Uncategorized", notes: "" },
+  { id: 1, name: "Randy's Repair Service", amount: -530.12, date: "2025-05-20", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
+  { id: 2, name: "AgriSupply Co.", amount: -276.79, date: "2025-05-19", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
+  { id: 3, name: "Shell 3871253", amount: -116.42, date: "2025-05-17", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
+  { id: 4, name: "Midwest Seed Supply", amount: -445.23, date: "2025-05-15", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
+  { id: 5, name: "Farm Bureau Insurance", amount: -345.88, date: "2025-05-14", bankAccount: "Savings", category: "Uncategorized", notes: "" },
+  { id: 6, name: "Harvest Gold Elevator", amount: 2150.00, date: "2025-05-13", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
+  { id: 7, name: "Venmo: Jorge Zamp...", amount: -1200.00, date: "2025-05-12", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
+  { id: 8, name: "Tractor Supply Co #4821", amount: -425.50, date: "2025-05-10", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
 ];
 
 const categoryOptions = [
@@ -55,6 +56,16 @@ const Transactions = () => {
       prev.map(t => 
         t.id === transactionId 
           ? { ...t, category: newCategory }
+          : t
+      )
+    );
+  };
+
+  const handleContactChange = (transactionId: number, newContact: string) => {
+    setTransactions(prev => 
+      prev.map(t => 
+        t.id === transactionId 
+          ? { ...t, name: newContact }
           : t
       )
     );
@@ -173,12 +184,20 @@ const Transactions = () => {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-semibold text-lg">{transaction.name}</h3>
+                          <Input
+                            value={transaction.name}
+                            onChange={(e) => handleContactChange(transaction.id, e.target.value)}
+                            className="font-semibold text-lg bg-transparent border-none p-0 h-auto focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
                           <span className={`font-bold text-lg ${transaction.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
                             {transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount).toFixed(2)}
                           </span>
                         </div>
-                        <p className="text-xs text-gray-500">{transaction.date}</p>
+                        <div className="flex items-center gap-3 text-xs text-gray-500">
+                          <span>{transaction.date}</span>
+                          <span>•</span>
+                          <span>{transaction.bankAccount}</span>
+                        </div>
                       </div>
                       <div className="ml-6 min-w-[150px]">
                         <Select 
