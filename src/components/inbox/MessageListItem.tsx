@@ -1,7 +1,6 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, MessageSquare, Phone, Reply, ChevronDown, ChevronRight } from "lucide-react";
+import { Mail, MessageSquare, Phone, Reply, ChevronDown, ChevronRight, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import WysiwygEditor from "./WysiwygEditor";
 
@@ -36,6 +35,7 @@ interface MessageListItemProps {
 const MessageListItem = ({ message, onViewMessage, onMarkAsRead, onSendReply }: MessageListItemProps) => {
   const [showReplyEditor, setShowReplyEditor] = useState(false);
   const [showReplies, setShowReplies] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const getMessageIcon = (type: string) => {
     switch (type) {
@@ -74,6 +74,19 @@ const MessageListItem = ({ message, onViewMessage, onMarkAsRead, onSendReply }: 
     setShowReplies(!showReplies);
   };
 
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+    if (!isExpanded) {
+      handleViewMessage();
+    }
+  };
+
+  // Check if message content is long (more than 200 characters)
+  const isLongMessage = message.content.length > 200;
+  const displayContent = isExpanded || !isLongMessage 
+    ? message.content 
+    : message.content.substring(0, 200) + '...';
+
   return (
     <div className="space-y-2">
       <Card className={`cursor-pointer transition-all hover:shadow-md ${!message.read ? 'ring-2 ring-blue-200' : ''}`}>
@@ -95,9 +108,32 @@ const MessageListItem = ({ message, onViewMessage, onMarkAsRead, onSendReply }: 
                 <p className={`text-sm mb-1 ${!message.read ? 'font-semibold' : ''} break-words`}>
                   {message.subject}
                 </p>
-                <p className="text-sm text-gray-600 break-words line-clamp-2">
-                  {message.content}
+                <p className="text-sm text-gray-600 break-words whitespace-pre-wrap">
+                  {displayContent}
                 </p>
+                {isLongMessage && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleExpanded();
+                    }}
+                    className="h-6 px-2 text-xs mt-1 text-blue-600 hover:text-blue-700"
+                  >
+                    {isExpanded ? (
+                      <>
+                        <ChevronDown className="w-3 h-3 mr-1" />
+                        Show less
+                      </>
+                    ) : (
+                      <>
+                        <MoreHorizontal className="w-3 h-3 mr-1" />
+                        Show more
+                      </>
+                    )}
+                  </Button>
+                )}
                 <p className="text-xs text-gray-500 mt-1">
                   {message.date} at {message.time}
                 </p>
