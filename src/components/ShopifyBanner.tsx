@@ -5,7 +5,16 @@ const ShopifyBanner = () => {
   return (
     <Alert className="bg-yellow-50 border-yellow-200 mb-6">
       <AlertDescription className="text-yellow-800 font-medium text-center">
-        Please connect your Shopify account to get accurate financial analysis!
+        Bank Feed Error! Please log into your{" "}
+        <a 
+          href="https://www.xero.com" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="underline hover:text-yellow-900 font-semibold"
+        >
+          Xero
+        </a>{" "}
+        account to reconnect your bank feeds.
       </AlertDescription>
     </Alert>
   );
