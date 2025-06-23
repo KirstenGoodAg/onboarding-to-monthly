@@ -50,7 +50,7 @@ const Reports = () => {
   const reports = [
     {
       id: "balance",
-      title: "Balance Statement",
+      title: "Balance Sheet",
       description: "View your assets, liabilities, and equity at a specific point in time",
       icon: Calculator,
       color: "text-blue-600",
