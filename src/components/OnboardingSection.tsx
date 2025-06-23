@@ -5,6 +5,7 @@ import { useState } from "react";
 
 type OnboardingCard = {
   label: string;
+  description: string;
   link: string;
 };
 
@@ -51,6 +52,7 @@ const OnboardingSection = ({
             <CardContent className="flex flex-col justify-between h-full pt-6 pb-2">
               <div>
                 <CardTitle className="text-lg mb-2">{card.label}</CardTitle>
+                <p className="text-sm text-gray-600">{card.description}</p>
               </div>
               <div className="flex items-center justify-end">
                 <span
@@ -85,6 +87,7 @@ const OnboardingSection = ({
             <CardContent className="flex flex-col justify-between h-full pt-6 pb-2">
               <div>
                 <CardTitle className="text-lg mb-2">{cards[4].label}</CardTitle>
+                <p className="text-sm text-gray-600">{cards[4].description}</p>
               </div>
               <div className="flex items-center justify-end">
                 <span

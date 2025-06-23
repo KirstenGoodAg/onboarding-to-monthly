@@ -10,22 +10,27 @@ import TransactionCategorization from "../components/TransactionCategorization";
 const onboardingCards = [
   {
     label: "Fill out your profile",
+    description: "Complete your basic farm information and contact details to get started.",
     link: "/profile",
   },
   {
     label: "Connect your bank feeds",
+    description: "Link your bank accounts to automatically import transactions.",
     link: "/profile", // Can change to dedicated bank page if exists in future
   },
   {
     label: "Upload your documents",
+    description: "Upload important financial documents and receipts for record keeping.",
     link: "/upload",
   },
   {
     label: "Schedule your onboarding call",
+    description: "Book a call with your dedicated bookkeeper to discuss your needs.",
     link: "/profile", // Set to calendar page if exists in future
   },
   {
     label: "Answer Advisor questions",
+    description: "Respond to questions from your financial advisor to personalize your service.",
     link: "/inbox",
   },
 ];
