@@ -84,20 +84,13 @@ const WysiwygEditor = ({ onSendReply, placeholder = "Type your reply..." }: Wysi
       <div
         ref={editorRef}
         contentEditable
-        className="min-h-[120px] p-3 focus:outline-none"
+        className="min-h-[120px] p-3 focus:outline-none empty:before:content-[attr(data-placeholder)] empty:before:text-gray-400 empty:before:pointer-events-none"
         style={{ wordBreak: 'break-word' }}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         suppressContentEditableWarning={true}
         data-placeholder={placeholder}
       />
-      <style jsx>{`
-        div[contenteditable]:empty:before {
-          content: attr(data-placeholder);
-          color: #9ca3af;
-          pointer-events: none;
-        }
-      `}</style>
     </div>
   );
 };
