@@ -74,11 +74,39 @@ const dataMap = {
   ],
 };
 
-const glanceStats = [
-  { label: "Top-line Revenue", value: "$18,700" },
-  { label: "Net Profits", value: "$2,100" },
-  { label: "Cash on Hand", value: "$6,500" },
-];
+// Glance stats data for different time periods
+const glanceStatsData = {
+  "current-month": [
+    { label: "Top-line Revenue", value: "$18,700" },
+    { label: "Net Profits", value: "$2,100" },
+    { label: "Cash on Hand", value: "$6,500" },
+  ],
+  "last-month": [
+    { label: "Top-line Revenue", value: "$17,500" },
+    { label: "Net Profits", value: "$1,850" },
+    { label: "Cash on Hand", value: "$6,200" },
+  ],
+  "last-quarter": [
+    { label: "Top-line Revenue", value: "$52,400" },
+    { label: "Net Profits", value: "$5,750" },
+    { label: "Cash on Hand", value: "$6,500" },
+  ],
+  "year-to-date": [
+    { label: "Top-line Revenue", value: "$98,200" },
+    { label: "Net Profits", value: "$11,300" },
+    { label: "Cash on Hand", value: "$6,500" },
+  ],
+  "previous-year": [
+    { label: "Top-line Revenue", value: "$156,800" },
+    { label: "Net Profits", value: "$18,900" },
+    { label: "Cash on Hand", value: "$5,100" },
+  ],
+  "two-years-ago": [
+    { label: "Top-line Revenue", value: "$142,300" },
+    { label: "Net Profits", value: "$16,200" },
+    { label: "Cash on Hand", value: "$4,800" },
+  ],
+};
 
 // Placeholder: uncategorized transactions
 const uncategorizedTransactions = [
@@ -147,6 +175,7 @@ const Dashboard = () => {
   
   const [graphRange, setGraphRange] = useState<"6m" | "12m" | "2y" | "3y">("6m");
   const [expenseTimePeriod, setExpenseTimePeriod] = useState<"1m" | "6m" | "12m">("1m");
+  const [glanceTimePeriod, setGlanceTimePeriod] = useState("current-month");
   const navigate = useNavigate();
 
   // Save checkbox states to localStorage whenever they change
@@ -176,6 +205,9 @@ const Dashboard = () => {
   const firstFourChecked = checked.slice(0, 4).every(Boolean);
   const showTransactionCategorization = firstFourChecked && !onboardingComplete;
 
+  // Get current glance stats based on selected time period
+  const currentGlanceStats = glanceStatsData[glanceTimePeriod as keyof typeof glanceStatsData];
+
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-transparent">
       <DashboardHeader 
@@ -199,7 +231,9 @@ const Dashboard = () => {
           {/* Monthly Books Section - show only when all onboarding complete */}
           {onboardingComplete && (
             <MonthlyBooksSectionWithToggle
-              glanceStats={glanceStats}
+              glanceStats={currentGlanceStats}
+              glanceTimePeriod={glanceTimePeriod}
+              onGlanceTimePeriodChange={setGlanceTimePeriod}
               dataMap={dataMap}
               graphRange={graphRange}
               setGraphRange={setGraphRange}

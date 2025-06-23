@@ -7,6 +7,8 @@ import MonthlyBooksSectionPremium from "./MonthlyBooksSectionPremium";
 
 interface MonthlyBooksSectionWithToggleProps {
   glanceStats: { label: string; value: string }[];
+  glanceTimePeriod: string;
+  onGlanceTimePeriodChange: (period: string) => void;
   dataMap: Record<string, any[]>;
   graphRange: "6m" | "12m" | "2y" | "3y";
   setGraphRange: (val: "6m" | "12m" | "2y" | "3y") => void;
@@ -82,11 +84,15 @@ const MonthlyBooksSectionWithToggle = (props: MonthlyBooksSectionWithToggleProps
       )}
       
       {currentView === "essentials" && (
-        <MonthlyBooksSectionEssentials {...props} />
+        <MonthlyBooksSectionEssentials 
+          {...props}
+        />
       )}
       
       {currentView === "premium" && (
-        <MonthlyBooksSectionPremium {...props} />
+        <MonthlyBooksSectionPremium 
+          {...props}
+        />
       )}
     </div>
   );
