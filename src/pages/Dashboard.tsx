@@ -15,6 +15,7 @@ import {
   recentInboxMessages,
   recentExpenses,
   expenseCategoriesData,
+  farmEquityData,
 } from "../data/dashboardData";
 
 const Dashboard = () => {
@@ -78,6 +79,7 @@ const Dashboard = () => {
               expenseCategories={expenseCategoriesData[expenseTimePeriod]}
               expenseTimePeriod={expenseTimePeriod}
               onExpenseTimePeriodChange={setExpenseTimePeriod}
+              farmEquity={farmEquityData}
             />
           )}
         </div>

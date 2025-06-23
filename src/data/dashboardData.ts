@@ -157,3 +157,9 @@ export const expenseCategoriesData = {
     { name: "Office", value: 809.40, color: "#ffb347" },
   ],
 };
+
+export const farmEquityData = {
+  equityValue: 2450000,
+  changePercentage: 3.2,
+  changeDirection: "up" as const,
+};

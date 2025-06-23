@@ -3,6 +3,7 @@ import GlanceStatsCard from "./GlanceStatsCard";
 import RevenueChartCard from "./RevenueChartCard";
 import NeedsAttentionCard from "./NeedsAttentionCard";
 import InboxCard from "./InboxCard";
+import FarmEquityCard from "./FarmEquityCard";
 import ExpensesCard from "./ExpensesCard";
 import { Card, CardTitle } from "@/components/ui/card";
 import ShopifyBanner from "./ShopifyBanner";
@@ -23,6 +24,7 @@ interface MonthlyBooksSectionPremiumProps {
   expenseCategories: { name: string; value: number; color: string }[];
   expenseTimePeriod: "1m" | "6m" | "12m";
   onExpenseTimePeriodChange: (period: "1m" | "6m" | "12m") => void;
+  farmEquity: { equityValue: number; changePercentage: number; changeDirection: "up" | "down" };
 }
 
 const MonthlyBooksSectionPremium = ({
@@ -40,6 +42,7 @@ const MonthlyBooksSectionPremium = ({
   expenseCategories,
   expenseTimePeriod,
   onExpenseTimePeriodChange,
+  farmEquity,
 }: MonthlyBooksSectionPremiumProps) => {
   const handleMeetWithAdvisor = () => {
     console.log("Navigate to advisor meeting");
@@ -84,10 +87,15 @@ const MonthlyBooksSectionPremium = ({
             />
             <RevenueChartCard dataMap={dataMap} graphRange={graphRange} setGraphRange={setGraphRange} />
           </div>
-          {/* Right (25%): Needs Attention and Inbox Cards */}
+          {/* Right (25%): Needs Attention, Inbox, and Farm Equity Cards */}
           <div className="w-full lg:w-1/4 flex flex-col gap-6">
             <NeedsAttentionCard uncategorizedTransactions={uncategorizedTransactions} onReviewClick={onReviewClick} />
             <InboxCard recentInboxMessages={recentInboxMessages} onInboxClick={onInboxClick} />
+            <FarmEquityCard 
+              equityValue={farmEquity.equityValue}
+              changePercentage={farmEquity.changePercentage}
+              changeDirection={farmEquity.changeDirection}
+            />
           </div>
         </div>
         

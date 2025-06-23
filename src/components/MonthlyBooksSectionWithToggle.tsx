@@ -20,6 +20,7 @@ interface MonthlyBooksSectionWithToggleProps {
   expenseCategories: { name: string; value: number; color: string }[];
   expenseTimePeriod: "1m" | "6m" | "12m";
   onExpenseTimePeriodChange: (period: "1m" | "6m" | "12m") => void;
+  farmEquity: { equityValue: number; changePercentage: number; changeDirection: "up" | "down" };
 }
 
 type ViewType = "basics" | "essentials" | "premium";
