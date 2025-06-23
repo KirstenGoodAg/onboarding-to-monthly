@@ -1,3 +1,4 @@
+
 import GlanceStatsCard from "./GlanceStatsCard";
 import RevenueChartCard from "./RevenueChartCard";
 import NeedsAttentionCard from "./NeedsAttentionCard";
@@ -7,6 +8,8 @@ import ShopifyBanner from "./ShopifyBanner";
 
 interface MonthlyBooksSectionProps {
   glanceStats: { label: string; value: string }[];
+  glanceTimePeriod: string;
+  onGlanceTimePeriodChange: (period: string) => void;
   dataMap: Record<string, any[]>;
   graphRange: "6m" | "12m" | "2y" | "3y";
   setGraphRange: (val: "6m" | "12m" | "2y" | "3y") => void;
@@ -23,6 +26,8 @@ interface MonthlyBooksSectionProps {
 
 const MonthlyBooksSection = ({
   glanceStats,
+  glanceTimePeriod,
+  onGlanceTimePeriodChange,
   dataMap,
   graphRange,
   setGraphRange,
@@ -45,7 +50,11 @@ const MonthlyBooksSection = ({
       <div className="w-full flex flex-col lg:flex-row gap-6">
         {/* Left (75%): Numbers & Graph */}
         <div className="w-full lg:w-3/4 flex flex-col gap-6">
-          <GlanceStatsCard glanceStats={glanceStats} />
+          <GlanceStatsCard 
+            glanceStats={glanceStats} 
+            timePeriod={glanceTimePeriod}
+            onTimePeriodChange={onGlanceTimePeriodChange}
+          />
           <RevenueChartCard dataMap={dataMap} graphRange={graphRange} setGraphRange={setGraphRange} />
         </div>
         {/* Right (25%): Needs Attention and Inbox Cards */}
