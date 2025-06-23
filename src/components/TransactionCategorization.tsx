@@ -1,7 +1,9 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -57,6 +59,16 @@ const TransactionCategorization = () => {
       prev.map(t => 
         t.id === transactionId 
           ? { ...t, category: newCategory }
+          : t
+      )
+    );
+  };
+
+  const handleContactChange = (transactionId: number, newContact: string) => {
+    setTransactions(prev => 
+      prev.map(t => 
+        t.id === transactionId 
+          ? { ...t, contact: newContact }
           : t
       )
     );
@@ -125,7 +137,13 @@ const TransactionCategorization = () => {
                   <TableCell className={`font-semibold ${transaction.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
                     {transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount).toFixed(2)}
                   </TableCell>
-                  <TableCell>{transaction.contact}</TableCell>
+                  <TableCell>
+                    <Input
+                      value={transaction.contact}
+                      onChange={(e) => handleContactChange(transaction.id, e.target.value)}
+                      className="w-[180px]"
+                    />
+                  </TableCell>
                   <TableCell>
                     <Select 
                       value={transaction.category} 
