@@ -1,13 +1,13 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import TransactionSearch from "@/components/TransactionSearch";
+import TransactionList from "@/components/TransactionList";
+import { Transaction, SearchFilters } from "@/types/transaction";
 
 // Sample transaction data with realistic names and bank account info
-const sampleTransactions = [
+const sampleTransactions: Transaction[] = [
   { id: 1, name: "Randy's Repair Service", amount: -530.12, date: "2025-05-20", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
   { id: 2, name: "AgriSupply Co.", amount: -276.79, date: "2025-05-19", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
   { id: 3, name: "Shell 3871253", amount: -116.42, date: "2025-05-17", bankAccount: "Farm Operating", category: "Uncategorized", notes: "" },
@@ -30,17 +30,8 @@ const categoryOptions = [
   "Other"
 ];
 
-interface SearchFilters {
-  searchTerm: string;
-  category: string;
-  minAmount: string;
-  maxAmount: string;
-  startDate: string;
-  endDate: string;
-}
-
 const Transactions = () => {
-  const [transactions, setTransactions] = useState(sampleTransactions);
+  const [transactions, setTransactions] = useState<Transaction[]>(sampleTransactions);
   const [filter, setFilter] = useState("all");
   const [searchFilters, setSearchFilters] = useState<SearchFilters>({
     searchTerm: "",
@@ -51,37 +42,17 @@ const Transactions = () => {
     endDate: ""
   });
 
-  const handleCategoryChange = (transactionId: number, newCategory: string) => {
+  const handleTransactionUpdate = (transactionId: number, field: keyof Transaction, value: string) => {
     setTransactions(prev => 
       prev.map(t => 
         t.id === transactionId 
-          ? { ...t, category: newCategory }
+          ? { ...t, [field]: value }
           : t
       )
     );
   };
 
-  const handleContactChange = (transactionId: number, newContact: string) => {
-    setTransactions(prev => 
-      prev.map(t => 
-        t.id === transactionId 
-          ? { ...t, name: newContact }
-          : t
-      )
-    );
-  };
-
-  const handleNotesChange = (transactionId: number, newNotes: string) => {
-    setTransactions(prev => 
-      prev.map(t => 
-        t.id === transactionId 
-          ? { ...t, notes: newNotes }
-          : t
-      )
-    );
-  };
-
-  const applyFilters = (transactions: typeof sampleTransactions) => {
+  const applyFilters = (transactions: Transaction[]) => {
     return transactions.filter(t => {
       // Basic filter (all or uncategorized)
       const passesBasicFilter = filter === "all" || (filter === "uncategorized" && t.category === "Uncategorized");
@@ -178,57 +149,11 @@ const Transactions = () => {
               <CardTitle>Transactions ({filteredTransactions.length} results)</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {filteredTransactions.map((transaction) => (
-                  <div key={transaction.id} className="p-4 bg-gray-50 rounded-lg border">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <Input
-                            value={transaction.name}
-                            onChange={(e) => handleContactChange(transaction.id, e.target.value)}
-                            className="font-semibold text-lg bg-transparent border-none p-0 h-auto focus-visible:ring-0 focus-visible:ring-offset-0"
-                          />
-                          <span className={`font-bold text-lg ${transaction.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
-                            {transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount).toFixed(2)}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-3 text-xs text-gray-500">
-                          <span>{transaction.date}</span>
-                          <span>•</span>
-                          <span>{transaction.bankAccount}</span>
-                        </div>
-                      </div>
-                      <div className="ml-6 min-w-[150px]">
-                        <Select 
-                          value={transaction.category} 
-                          onValueChange={(value) => handleCategoryChange(transaction.id, value)}
-                        >
-                          <SelectTrigger className={transaction.category === "Uncategorized" ? "border-yellow-400" : ""}>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Uncategorized">Uncategorized</SelectItem>
-                            {categoryOptions.map(category => (
-                              <SelectItem key={category} value={category}>{category}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                    <div className="mt-3">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
-                      <Textarea
-                        placeholder="Add notes about this transaction..."
-                        value={transaction.notes}
-                        onChange={(e) => handleNotesChange(transaction.id, e.target.value)}
-                        className="w-full"
-                        rows={2}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <TransactionList 
+                transactions={filteredTransactions}
+                categoryOptions={categoryOptions}
+                onTransactionUpdate={handleTransactionUpdate}
+              />
             </CardContent>
           </Card>
         </div>
