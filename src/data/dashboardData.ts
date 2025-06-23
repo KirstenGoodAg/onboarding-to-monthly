@@ -1,4 +1,3 @@
-
 // Example financial data
 export const dataMap = {
   "6m": [
@@ -52,34 +51,52 @@ export const dataMap = {
 // Glance stats data for different time periods
 export const glanceStatsData = {
   "current-month": [
-    { label: "Top-line Revenue", value: "$18,700" },
-    { label: "Net Profits", value: "$2,100" },
-    { label: "Cash on Hand", value: "$6,500" },
+    { label: "Top-line Revenue", value: "$18,700", explanation: "The total amount of money your business earned from sales before any costs are deducted." },
+    { label: "Gross Profit", value: "$8,900", explanation: "The profit remaining after subtracting the direct costs of producing your goods or services." },
+    { label: "Operating Profit", value: "$3,200", explanation: "The profit from your core business operations after deducting all operating expenses." },
+    { label: "Net Profit", value: "$2,800", explanation: "The final profit after all expenses, taxes, and costs have been subtracted from revenue." },
+    { label: "Net Cash", value: "$4,200", explanation: "The net change in your cash position, showing if you generated or used cash during the period." },
+    { label: "Cash on Hand", value: "$6,500", explanation: "The total amount of cash and cash equivalents your business currently has available." },
   ],
   "last-month": [
-    { label: "Top-line Revenue", value: "$17,500" },
-    { label: "Net Profits", value: "$1,850" },
-    { label: "Cash on Hand", value: "$6,200" },
+    { label: "Top-line Revenue", value: "$17,500", explanation: "The total amount of money your business earned from sales before any costs are deducted." },
+    { label: "Gross Profit", value: "$8,300", explanation: "The profit remaining after subtracting the direct costs of producing your goods or services." },
+    { label: "Operating Profit", value: "$2,800", explanation: "The profit from your core business operations after deducting all operating expenses." },
+    { label: "Net Profit", value: "$2,400", explanation: "The final profit after all expenses, taxes, and costs have been subtracted from revenue." },
+    { label: "Net Cash", value: "$3,800", explanation: "The net change in your cash position, showing if you generated or used cash during the period." },
+    { label: "Cash on Hand", value: "$6,200", explanation: "The total amount of cash and cash equivalents your business currently has available." },
   ],
   "last-quarter": [
-    { label: "Top-line Revenue", value: "$52,400" },
-    { label: "Net Profits", value: "$5,750" },
-    { label: "Cash on Hand", value: "$6,500" },
+    { label: "Top-line Revenue", value: "$52,400", explanation: "The total amount of money your business earned from sales before any costs are deducted." },
+    { label: "Gross Profit", value: "$24,100", explanation: "The profit remaining after subtracting the direct costs of producing your goods or services." },
+    { label: "Operating Profit", value: "$8,500", explanation: "The profit from your core business operations after deducting all operating expenses." },
+    { label: "Net Profit", value: "$7,200", explanation: "The final profit after all expenses, taxes, and costs have been subtracted from revenue." },
+    { label: "Net Cash", value: "$9,800", explanation: "The net change in your cash position, showing if you generated or used cash during the period." },
+    { label: "Cash on Hand", value: "$6,500", explanation: "The total amount of cash and cash equivalents your business currently has available." },
   ],
   "year-to-date": [
-    { label: "Top-line Revenue", value: "$98,200" },
-    { label: "Net Profits", value: "$11,300" },
-    { label: "Cash on Hand", value: "$6,500" },
+    { label: "Top-line Revenue", value: "$98,200", explanation: "The total amount of money your business earned from sales before any costs are deducted." },
+    { label: "Gross Profit", value: "$44,190", explanation: "The profit remaining after subtracting the direct costs of producing your goods or services." },
+    { label: "Operating Profit", value: "$15,700", explanation: "The profit from your core business operations after deducting all operating expenses." },
+    { label: "Net Profit", value: "$12,700", explanation: "The final profit after all expenses, taxes, and costs have been subtracted from revenue." },
+    { label: "Net Cash", value: "$18,200", explanation: "The net change in your cash position, showing if you generated or used cash during the period." },
+    { label: "Cash on Hand", value: "$6,500", explanation: "The total amount of cash and cash equivalents your business currently has available." },
   ],
   "previous-year": [
-    { label: "Top-line Revenue", value: "$156,800" },
-    { label: "Net Profits", value: "$18,900" },
-    { label: "Cash on Hand", value: "$5,100" },
+    { label: "Top-line Revenue", value: "$156,800", explanation: "The total amount of money your business earned from sales before any costs are deducted." },
+    { label: "Gross Profit", value: "$70,560", explanation: "The profit remaining after subtracting the direct costs of producing your goods or services." },
+    { label: "Operating Profit", value: "$25,000", explanation: "The profit from your core business operations after deducting all operating expenses." },
+    { label: "Net Profit", value: "$20,380", explanation: "The final profit after all expenses, taxes, and costs have been subtracted from revenue." },
+    { label: "Net Cash", value: "$28,400", explanation: "The net change in your cash position, showing if you generated or used cash during the period." },
+    { label: "Cash on Hand", value: "$5,100", explanation: "The total amount of cash and cash equivalents your business currently has available." },
   ],
   "two-years-ago": [
-    { label: "Top-line Revenue", value: "$142,300" },
-    { label: "Net Profits", value: "$16,200" },
-    { label: "Cash on Hand", value: "$4,800" },
+    { label: "Top-line Revenue", value: "$142,300", explanation: "The total amount of money your business earned from sales before any costs are deducted." },
+    { label: "Gross Profit", value: "$64,035", explanation: "The profit remaining after subtracting the direct costs of producing your goods or services." },
+    { label: "Operating Profit", value: "$22,800", explanation: "The profit from your core business operations after deducting all operating expenses." },
+    { label: "Net Profit", value: "$18,500", explanation: "The final profit after all expenses, taxes, and costs have been subtracted from revenue." },
+    { label: "Net Cash", value: "$24,600", explanation: "The net change in your cash position, showing if you generated or used cash during the period." },
+    { label: "Cash on Hand", value: "$4,800", explanation: "The total amount of cash and cash equivalents your business currently has available." },
   ],
 };
 
