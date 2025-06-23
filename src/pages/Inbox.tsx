@@ -1,13 +1,40 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MessageListItem from '../components/inbox/MessageListItem';
 import MessageDialog from '../components/inbox/MessageDialog';
 import { sampleMessages } from '../components/inbox/sampleMessages';
 import { Message } from '../components/inbox/MessageListItem';
 
 const Inbox = () => {
-  const [messages, setMessages] = useState<Message[]>(sampleMessages);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
+
+  // Load messages from localStorage and combine with sample messages
+  useEffect(() => {
+    const loadMessages = () => {
+      const savedMessages = JSON.parse(localStorage.getItem('inboxMessages') || '[]');
+      const combinedMessages = [...savedMessages, ...sampleMessages];
+      setMessages(combinedMessages);
+    };
+
+    // Load initially
+    loadMessages();
+
+    // Listen for storage changes
+    const handleStorageChange = () => {
+      loadMessages();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also check periodically for localStorage changes in same tab
+    const interval = setInterval(loadMessages, 1000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
 
   const markAsRead = (messageId: number) => {
     setMessages(prev => prev.map(msg => 

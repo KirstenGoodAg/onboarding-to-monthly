@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,7 @@ import Profile from "./pages/Profile";
 import Inbox from "./pages/Inbox";
 import Transactions from "./pages/Transactions";
 import Reports from "./pages/Reports";
+import FeedbackButton from "./components/FeedbackButton";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +37,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
+          <FeedbackButton />
         </div>
       </BrowserRouter>
     </TooltipProvider>
