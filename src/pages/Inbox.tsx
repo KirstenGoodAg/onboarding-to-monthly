@@ -35,9 +35,17 @@ const Inbox = () => {
   }, []);
 
   const markAsRead = (messageId: number) => {
-    setMessages(prev => prev.map(msg => 
-      msg.id === messageId ? { ...msg, read: true } : msg
-    ));
+    setMessages(prev => {
+      const updated = prev.map(msg => 
+        msg.id === messageId ? { ...msg, read: true } : msg
+      );
+      
+      // Save to localStorage
+      const savedMessages = updated.filter(msg => !sampleMessages.some(sample => sample.id === msg.id));
+      localStorage.setItem('inboxMessages', JSON.stringify(savedMessages));
+      
+      return updated;
+    });
   };
 
   const handleSendReply = (messageId: number, replyContent: string) => {
@@ -50,15 +58,23 @@ const Inbox = () => {
       time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    setMessages(prev => prev.map(msg => {
-      if (msg.id === messageId) {
-        return {
-          ...msg,
-          replies: [...(msg.replies || []), newReply]
-        };
-      }
-      return msg;
-    }));
+    setMessages(prev => {
+      const updated = prev.map(msg => {
+        if (msg.id === messageId) {
+          return {
+            ...msg,
+            replies: [...(msg.replies || []), newReply]
+          };
+        }
+        return msg;
+      });
+
+      // Save to localStorage - only save non-sample messages
+      const savedMessages = updated.filter(msg => !sampleMessages.some(sample => sample.id === msg.id));
+      localStorage.setItem('inboxMessages', JSON.stringify(savedMessages));
+      
+      return updated;
+    });
 
     console.log('Reply sent:', { messageId, replyContent });
   };
