@@ -47,24 +47,24 @@ const MessageListItem = ({ message, onViewMessage, onMarkAsRead }: MessageListIt
   return (
     <Card className={`cursor-pointer transition-all hover:shadow-md ${!message.read ? 'ring-2 ring-blue-200' : ''}`}>
       <CardContent className="p-4">
-        <div className="flex items-start justify-between">
-          <div className="flex items-start gap-3 flex-1">
-            <div className={`p-2 rounded-full ${getMessageTypeColor(message.type)}`}>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start gap-3 flex-1 min-w-0">
+            <div className={`p-2 rounded-full flex-shrink-0 ${getMessageTypeColor(message.type)}`}>
               {getMessageIcon(message.type)}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <h3 className={`font-medium truncate ${!message.read ? 'font-bold' : ''}`}>
+                <h3 className={`font-medium ${!message.read ? 'font-bold' : ''} break-words`}>
                   {message.from}
                 </h3>
                 {!message.read && (
-                  <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                  <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
                 )}
               </div>
-              <p className={`text-sm mb-1 truncate ${!message.read ? 'font-semibold' : ''}`}>
+              <p className={`text-sm mb-1 ${!message.read ? 'font-semibold' : ''} break-words`}>
                 {message.subject}
               </p>
-              <p className="text-sm text-gray-600 truncate">
+              <p className="text-sm text-gray-600 break-words line-clamp-2">
                 {message.content}
               </p>
               <p className="text-xs text-gray-500 mt-1">
@@ -76,6 +76,7 @@ const MessageListItem = ({ message, onViewMessage, onMarkAsRead }: MessageListIt
             variant="outline" 
             size="sm"
             onClick={handleViewMessage}
+            className="flex-shrink-0"
           >
             <Reply className="w-4 h-4 mr-1" />
             View & Reply
