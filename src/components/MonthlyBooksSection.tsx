@@ -14,7 +14,7 @@ interface MonthlyBooksSectionProps {
   onReviewClick: () => void;
   recentInboxMessages: { id: number; subject: string; date: string }[];
   onInboxClick: () => void;
-  recentExpenses: { id: number; description: string; amount: number; category: string; date: string }[];
+  recentExpenses: { id: number; description: string; amount: number; category: string; date: string; bankAccount: string }[];
   expenseCategories: { name: string; value: number; color: string }[];
   expenseTimePeriod: "1m" | "6m" | "12m";
   onExpenseTimePeriodChange: (period: "1m" | "6m" | "12m") => void;
