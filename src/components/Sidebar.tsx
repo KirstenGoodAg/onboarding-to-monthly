@@ -1,3 +1,4 @@
+
 import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -35,6 +36,13 @@ const Sidebar = () => {
 
   const navItems = [
     {
+      label: "Dashboard",
+      to: "/dashboard",
+      img: "https://goodagriculture.com/wp-content/uploads/2025/05/tractor-1.png",
+      alt: "Tractor",
+      id: "tractor",
+    },
+    {
       label: "Upload",
       to: "/upload",
       img: "https://goodagriculture.com/wp-content/uploads/2025/05/add.png",
@@ -43,13 +51,6 @@ const Sidebar = () => {
       defaultSvg: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>
       ),
-    },
-    {
-      label: "Dashboard",
-      to: "/dashboard",
-      img: "https://goodagriculture.com/wp-content/uploads/2025/05/tractor-1.png",
-      alt: "Tractor",
-      id: "tractor",
     },
     {
       label: "Profile",
