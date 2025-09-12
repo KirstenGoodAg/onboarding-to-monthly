@@ -38,11 +38,12 @@ export default function FarmerProfileForm() {
       years: "",
       
       // Income & Expenses
+      lastYearRevenue: "",
+      expectedRevenue: "",
       payroll: [],
       employees: "",
       receipts: "",
       bookkeepingSystem: "",
-      previousBookkeeping: "",
       
       // Assets & Liabilities
       farmAssets: "",

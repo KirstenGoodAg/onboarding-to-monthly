@@ -19,11 +19,12 @@ export type FormValues = {
   years: string;
   
   // Income & Expenses
+  lastYearRevenue: string;
+  expectedRevenue: string;
   payroll: string[];
   employees: string;
   receipts: string;
   bookkeepingSystem: string;
-  previousBookkeeping: string;
   
   // Assets & Liabilities
   farmAssets: string;

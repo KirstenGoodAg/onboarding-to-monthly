@@ -16,7 +16,7 @@ const payrollOptions = [
 ];
 
 const bookkeepingSystems = [
-  "QuickBooks Online", "QuickBooks Desktop", "Xero", "Wave", "Excel/Spreadsheets", "Other", "None"
+  "Quickbooks", "Xero", "Excel/Google Sheets", "Manual/handwritten notes", "Other"
 ];
 
 export default function IncomeExpensesSection({ control }: IncomeExpensesSectionProps) {
@@ -24,6 +24,36 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-semibold mb-4">Income & Expense Tracking</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <FormField
+            control={control}
+            name="lastYearRevenue"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Approximately how much revenue did you make last year?</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., $100,000" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="expectedRevenue"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Approximately how much revenue do you expect to make this year?</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., $120,000" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <FormField
@@ -40,20 +70,6 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
                     <option value={opt} key={opt} />
                   ))}
                 </datalist>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={control}
-            name="previousBookkeeping"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Who did your previous bookkeeping?</FormLabel>
-                <FormControl>
-                  <Input placeholder="Name or N/A" {...field} />
-                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
