@@ -16,7 +16,7 @@ const farmTypes = [
   "Agritourism", "Farm Consulting", "Other"
 ];
 
-const organicOptions = ["Yes", "No", "Transitioning"];
+const organicOptions = ["Yes", "No", "Transitioning", "Certified"];
 
 const entityTypes = [
   "Sole Proprietor", "LLC", "S Corporation", "C Corporation", "Partnership", "Other"
