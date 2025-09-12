@@ -99,12 +99,12 @@ export default function FarmerProfileForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-7 mb-8">
+            <TabsList className="flex flex-wrap w-full h-auto p-1 mb-8">
               {tabs.map((tab) => (
                 <TabsTrigger 
                   key={tab.id} 
                   value={tab.id}
-                  className="text-xs lg:text-sm px-2 lg:px-4"
+                  className="text-xs sm:text-sm px-3 py-2 flex-shrink-0 min-w-0"
                 >
                   {tab.label}
                 </TabsTrigger>
