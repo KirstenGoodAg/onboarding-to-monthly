@@ -70,11 +70,9 @@ export default function FarmerProfileForm() {
       creditLines: "",
       
       // Taxes
-      accountant: "",
-      bookkeeper: "",
-      incomeTax: "",
-      taxChallenges: "",
-      recordKeeping: "",
+      taxesFiled: "",
+      profitLoss: "",
+      availableDocuments: [],
       
       // Your Goals
       goals: "",

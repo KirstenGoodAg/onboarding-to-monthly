@@ -1,6 +1,6 @@
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Control } from "react-hook-form";
 import { FormValues } from "@/types/farmerForm";
 
@@ -9,23 +9,46 @@ interface TaxesSectionProps {
 }
 
 export default function TaxesSection({ control }: TaxesSectionProps) {
+  const documentOptions = [
+    "Past 3 years form 1049 Schedule F - Profit or Loss from Farming",
+    "Past 3 years Form 4562 - Depreciation and Amortization",
+    "Most recent detailed Depreciation and Amortization schedule",
+    "Bank statement PDF or CSV files for every month last year and this year to date",
+    "Mortgage amortization schedules",
+    "Loan schedules",
+    "Venmo/Cashapp CSV files for every month last year and this year to date"
+  ];
+
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-semibold mb-4">Tax & Professional Services</h2>
+        <h2 className="text-xl font-semibold mb-4">Tax Information</h2>
         <p className="text-sm text-muted-foreground mb-6">
-          Tell us about your current tax preparation and professional service relationships.
+          Help us understand your tax filing history and document availability.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="space-y-6">
           <FormField
             control={control}
-            name="accountant"
+            name="taxesFiled"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Do you currently have an accountant?</FormLabel>
+                <FormLabel>Have you filed taxes for the past three years?</FormLabel>
                 <FormControl>
-                  <Input placeholder="Accountant name or N/A" {...field} />
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    className="flex flex-col space-y-2"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="Yes" id="yes" />
+                      <label htmlFor="yes">Yes</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="No" id="no" />
+                      <label htmlFor="no">No</label>
+                    </div>
+                  </RadioGroup>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -34,12 +57,29 @@ export default function TaxesSection({ control }: TaxesSectionProps) {
 
           <FormField
             control={control}
-            name="bookkeeper"
+            name="profitLoss"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Do you currently have a bookkeeper?</FormLabel>
+                <FormLabel>Did you earn a profit or incur a loss in the last year?</FormLabel>
                 <FormControl>
-                  <Input placeholder="Bookkeeper name or N/A" {...field} />
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    className="flex flex-col space-y-2"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="Profit" id="profit" />
+                      <label htmlFor="profit">Profit</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="Loss" id="loss" />
+                      <label htmlFor="loss">Loss</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="I'm not sure" id="not-sure" />
+                      <label htmlFor="not-sure">I'm not sure</label>
+                    </div>
+                  </RadioGroup>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -48,50 +88,35 @@ export default function TaxesSection({ control }: TaxesSectionProps) {
 
           <FormField
             control={control}
-            name="incomeTax"
-            render={({ field }) => (
-              <FormItem className="md:col-span-2">
-                <FormLabel>Who prepares your annual income tax returns?</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Tax preparer name or self-prepared" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="space-y-4">
-          <FormField
-            control={control}
-            name="taxChallenges"
+            name="availableDocuments"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>What tax-related challenges do you face?</FormLabel>
+                <FormLabel>Are you able to provide the following documents?</FormLabel>
                 <FormControl>
-                  <Textarea 
-                    {...field} 
-                    placeholder="Describe any difficulties with tax preparation, deductions, quarterly payments, etc..."
-                    className="min-h-[100px]"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={control}
-            name="recordKeeping"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>How do you currently keep records for tax purposes?</FormLabel>
-                <FormControl>
-                  <Textarea 
-                    {...field} 
-                    placeholder="Describe your record-keeping system for tax deductions, depreciation, etc..."
-                    className="min-h-[100px]"
-                  />
+                  <div className="space-y-3">
+                    {documentOptions.map((document) => (
+                      <div key={document} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={document}
+                          checked={field.value?.includes(document) || false}
+                          onCheckedChange={(checked) => {
+                            const currentValue = field.value || [];
+                            if (checked) {
+                              field.onChange([...currentValue, document]);
+                            } else {
+                              field.onChange(currentValue.filter((item) => item !== document));
+                            }
+                          }}
+                        />
+                        <label
+                          htmlFor={document}
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          {document}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>

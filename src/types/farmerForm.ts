@@ -51,11 +51,9 @@ export type FormValues = {
   creditLines: string;
   
   // Taxes
-  accountant: string;
-  bookkeeper: string;
-  incomeTax: string;
-  taxChallenges: string;
-  recordKeeping: string;
+  taxesFiled: string;
+  profitLoss: string;
+  availableDocuments: string[];
   
   // Your Goals
   goals: string;
