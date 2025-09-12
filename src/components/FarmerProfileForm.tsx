@@ -23,6 +23,7 @@ export default function FarmerProfileForm() {
       farmOrBusiness: "",
       email: "",
       phone: "",
+      cellPhoneCarrier: "",
       mailing: "",
       preferredContact: "",
       

@@ -83,6 +83,20 @@ export default function AboutYouSection({ control }: AboutYouSectionProps) {
               </FormItem>
             )}
           />
+          <FormField
+            control={control}
+            name="cellPhoneCarrier"
+            rules={{ required: "Cell Phone Carrier is required" }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Cell Phone Carrier <span className="text-red-500">*</span></FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., Verizon, AT&T, T-Mobile" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
 
         <FormField

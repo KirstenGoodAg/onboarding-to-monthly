@@ -4,6 +4,7 @@ export type FormValues = {
   farmOrBusiness: string;
   email: string;
   phone: string;
+  cellPhoneCarrier: string;
   mailing: string;
   preferredContact: string;
   
