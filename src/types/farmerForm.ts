@@ -32,6 +32,12 @@ export type FormValues = {
   cashCheckPayments: string;
   personalAccountBusiness: string[];
   governmentPayments: string;
+  seasonalFluctuations: {
+    revenueUp: string[];
+    revenueDown: string[];
+    expensesUp: string[];
+    expensesDown: string[];
+  };
   
   // Assets & Liabilities
   farmAssets: string;

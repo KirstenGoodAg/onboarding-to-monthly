@@ -51,6 +51,12 @@ export default function FarmerProfileForm() {
       cashCheckPayments: "",
       personalAccountBusiness: [],
       governmentPayments: "",
+      seasonalFluctuations: {
+        revenueUp: [],
+        revenueDown: [],
+        expensesUp: [],
+        expensesDown: []
+      },
       
       // Assets & Liabilities
       farmAssets: "",

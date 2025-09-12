@@ -66,6 +66,22 @@ const personalAccountBusinessOptions = [
   { label: "Other", value: "other" }
 ];
 
+const timeperiods = [
+  { label: "Jan-Feb", value: "jan-feb" },
+  { label: "Mar-Apr", value: "mar-apr" },
+  { label: "May-Jun", value: "may-jun" },
+  { label: "Jul-Aug", value: "jul-aug" },
+  { label: "Sep-Oct", value: "sep-oct" },
+  { label: "Nov-Dec", value: "nov-dec" }
+];
+
+const fluctuationTypes = [
+  { label: "Revenue goes up", key: "revenueUp" },
+  { label: "Revenue goes down", key: "revenueDown" },
+  { label: "Expenses go up", key: "expensesUp" },
+  { label: "Expenses go down", key: "expensesDown" }
+];
+
 export default function IncomeExpensesSection({ control }: IncomeExpensesSectionProps) {
   return (
     <div className="space-y-6">
@@ -310,6 +326,61 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
                   ))}
                 </RadioGroup>
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="seasonalFluctuations"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Are there certain times of the year you expect income and/or expenses to fluctuate?</FormLabel>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse border border-gray-300">
+                  <thead>
+                    <tr>
+                      <th className="border border-gray-300 p-2 bg-gray-50 text-left font-medium"></th>
+                      {timeperiods.map(period => (
+                        <th key={period.value} className="border border-gray-300 p-2 bg-gray-50 text-center font-medium text-sm">
+                          {period.label}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {fluctuationTypes.map(type => (
+                      <tr key={type.key}>
+                        <td className="border border-gray-300 p-2 font-medium text-sm">{type.label}</td>
+                        {timeperiods.map(period => (
+                          <td key={period.value} className="border border-gray-300 p-2 text-center">
+                            <Checkbox
+                              checked={field.value?.[type.key as keyof typeof field.value]?.includes(period.value) || false}
+                              onCheckedChange={checked => {
+                                const currentValues = field.value || { revenueUp: [], revenueDown: [], expensesUp: [], expensesDown: [] };
+                                const currentTypeValues = currentValues[type.key as keyof typeof currentValues] || [];
+                                
+                                if (checked) {
+                                  field.onChange({
+                                    ...currentValues,
+                                    [type.key]: [...currentTypeValues, period.value]
+                                  });
+                                } else {
+                                  field.onChange({
+                                    ...currentValues,
+                                    [type.key]: currentTypeValues.filter((v: string) => v !== period.value)
+                                  });
+                                }
+                              }}
+                            />
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <FormMessage />
             </FormItem>
           )}
