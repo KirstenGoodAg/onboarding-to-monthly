@@ -25,6 +25,9 @@ export type FormValues = {
   employees: string;
   receipts: string;
   bookkeepingSystem: string;
+  businessAccounts: string[];
+  accountUsageDetails: string;
+  businessPersonalSeparation: string;
   
   // Assets & Liabilities
   farmAssets: string;

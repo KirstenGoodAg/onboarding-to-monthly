@@ -2,6 +2,8 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { Control } from "react-hook-form";
 import { FormValues } from "@/types/farmerForm";
 
@@ -17,6 +19,21 @@ const payrollOptions = [
 
 const bookkeepingSystems = [
   "Quickbooks", "Xero", "Excel/Google Sheets", "Manual/handwritten notes", "Other"
+];
+
+const businessAccountOptions = [
+  { label: "Business Checking", value: "business-checking" },
+  { label: "Business Savings", value: "business-savings" },
+  { label: "Business Credit Cards", value: "business-credit-cards" },
+  { label: "Personal Checking/Credit Cards", value: "personal-checking-credit" },
+  { label: "Other", value: "other" }
+];
+
+const separationOptions = [
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" },
+  { label: "I try", value: "i-try" },
+  { label: "Other", value: "other" }
 ];
 
 export default function IncomeExpensesSection({ control }: IncomeExpensesSectionProps) {
@@ -74,7 +91,85 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
               </FormItem>
             )}
           />
+        </div>
 
+        <FormField
+          control={control}
+          name="businessAccounts"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Accounts used for business purposes (select all that apply)</FormLabel>
+              <div className="flex flex-col gap-2">
+                {businessAccountOptions.map(opt => (
+                  <label
+                    key={opt.value}
+                    className="flex items-center gap-2 cursor-pointer text-sm"
+                  >
+                    <Checkbox
+                      checked={field.value?.includes(opt.value)}
+                      onCheckedChange={checked => {
+                        if (checked) {
+                          field.onChange([...(field.value || []), opt.value]);
+                        } else {
+                          field.onChange((field.value || []).filter((v: string) => v !== opt.value));
+                        }
+                      }}
+                    />
+                    {opt.label}
+                  </label>
+                ))}
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="accountUsageDetails"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Account usage details (How many accounts of each type, how are accounts used, etc)</FormLabel>
+              <FormControl>
+                <Textarea 
+                  {...field} 
+                  placeholder="1 Wells Fargo Business Checking used for large operating expenses, 1 Chase Business Credit Card used for smaller daily expenses"
+                  className="min-h-[100px]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="businessPersonalSeparation"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Do you keep business and personal transactions separate?</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  className="flex flex-col gap-2"
+                >
+                  {separationOptions.map(opt => (
+                    <div key={opt.value} className="flex items-center space-x-2">
+                      <RadioGroupItem value={opt.value} id={opt.value} />
+                      <Label htmlFor={opt.value} className="text-sm cursor-pointer">
+                        {opt.label}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <FormField
             control={control}
             name="employees"

@@ -44,6 +44,9 @@ export default function FarmerProfileForm() {
       employees: "",
       receipts: "",
       bookkeepingSystem: "",
+      businessAccounts: [],
+      accountUsageDetails: "",
+      businessPersonalSeparation: "",
       
       // Assets & Liabilities
       farmAssets: "",
