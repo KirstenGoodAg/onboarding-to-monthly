@@ -1,5 +1,6 @@
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Control } from "react-hook-form";
@@ -60,6 +61,24 @@ export default function AboutYourFarmSection({ control }: AboutYourFarmSectionPr
             )}
           />
         </div>
+
+        <FormField
+          control={control}
+          name="productServicesDetail"
+          render={({ field }) => (
+            <FormItem className="mt-4">
+              <FormLabel>Product/Services Detail</FormLabel>
+              <FormControl>
+                <Textarea 
+                  {...field} 
+                  placeholder="Favorite things to grow? Which are most demanding? Which do you want to focus on or get away from?"
+                  className="min-h-[100px]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 

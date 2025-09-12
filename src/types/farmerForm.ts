@@ -10,6 +10,7 @@ export type FormValues = {
   
   // About Your Farm
   typeOfFarm: string[];
+  productServicesDetail: string;
   organic: string;
   acres: string;
   livestock: string;

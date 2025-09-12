@@ -29,6 +29,7 @@ export default function FarmerProfileForm() {
       
       // About Your Farm
       typeOfFarm: [],
+      productServicesDetail: "",
       organic: "",
       acres: "",
       livestock: "",
