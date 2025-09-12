@@ -42,11 +42,11 @@ export default function TaxesSection({ control }: TaxesSectionProps) {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="Yes" id="yes" />
-                      <label htmlFor="yes">Yes</label>
+                      <label htmlFor="yes" className="text-sm">Yes</label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="No" id="no" />
-                      <label htmlFor="no">No</label>
+                      <label htmlFor="no" className="text-sm">No</label>
                     </div>
                   </RadioGroup>
                 </FormControl>
@@ -69,15 +69,15 @@ export default function TaxesSection({ control }: TaxesSectionProps) {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="Profit" id="profit" />
-                      <label htmlFor="profit">Profit</label>
+                      <label htmlFor="profit" className="text-sm">Profit</label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="Loss" id="loss" />
-                      <label htmlFor="loss">Loss</label>
+                      <label htmlFor="loss" className="text-sm">Loss</label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="I'm not sure" id="not-sure" />
-                      <label htmlFor="not-sure">I'm not sure</label>
+                      <label htmlFor="not-sure" className="text-sm">I'm not sure</label>
                     </div>
                   </RadioGroup>
                 </FormControl>
