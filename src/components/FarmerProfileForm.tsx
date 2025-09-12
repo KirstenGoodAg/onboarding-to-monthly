@@ -60,6 +60,7 @@ export default function FarmerProfileForm() {
       h2aEmployees: "",
       payrollSoftware: "",
       paymentMethods: [],
+      commonVendors: "",
       
       // Assets & Liabilities
       farmAssets: "",

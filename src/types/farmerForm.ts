@@ -41,6 +41,7 @@ export type FormValues = {
   h2aEmployees: string;
   payrollSoftware: string;
   paymentMethods: string[];
+  commonVendors: string;
   
   // Assets & Liabilities
   farmAssets: string;

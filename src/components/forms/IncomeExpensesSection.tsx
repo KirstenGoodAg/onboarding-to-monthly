@@ -507,12 +507,30 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
           control={control}
           name="receipts"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-6">
               <FormLabel>How do you currently organize receipts and expenses?</FormLabel>
               <FormControl>
                 <Textarea 
                   {...field} 
                   placeholder="Describe your current receipt organization process..."
+                  className="min-h-[100px]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="commonVendors"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Please share details on common vendors (anyone you pay for goods and services) we may expect to see on your books regularly.</FormLabel>
+              <FormControl>
+                <Textarea 
+                  {...field} 
+                  placeholder="List common vendors and services you regularly pay for..."
                   className="min-h-[100px]"
                 />
               </FormControl>
