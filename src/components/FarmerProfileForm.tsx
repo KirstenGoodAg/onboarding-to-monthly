@@ -76,9 +76,8 @@ export default function FarmerProfileForm() {
       
       // Your Goals
       goals: "",
-      accountingAssistance: "",
-      growthPlans: "",
-      financialChallenges: "",
+      nextImportantStep: "",
+      confidenceReasons: "",
       
       // What Drives You
       farmingMotivation: "",

@@ -23,6 +23,9 @@ export default function YourGoalsSection({ control }: YourGoalsSectionProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>What are your goals for your farm or business?</FormLabel>
+                <p className="text-sm text-muted-foreground italic mt-1 mb-3">
+                  Do you have any owner/partner salary goals? Do you know what you need to generate to break even? Are you planning to expand or change your operation significantly in the next few years?
+                </p>
                 <FormControl>
                   <Textarea 
                     {...field} 
@@ -37,14 +40,14 @@ export default function YourGoalsSection({ control }: YourGoalsSectionProps) {
 
           <FormField
             control={control}
-            name="growthPlans"
+            name="nextImportantStep"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Do you have plans to expand or change your operation?</FormLabel>
+                <FormLabel>From your perspective, what is the next most important step for you to achieve your goals?</FormLabel>
                 <FormControl>
                   <Textarea 
                     {...field} 
-                    placeholder="Tell us about any expansion plans, new crops, additional livestock, new markets, etc..."
+                    placeholder="Tell us about the most important next step you need to take..."
                     className="min-h-[100px]"
                   />
                 </FormControl>
@@ -55,32 +58,17 @@ export default function YourGoalsSection({ control }: YourGoalsSectionProps) {
 
           <FormField
             control={control}
-            name="financialChallenges"
+            name="confidenceReasons"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>What are your biggest financial challenges?</FormLabel>
+                <FormLabel>What are your reasons for feeling confident (or not) about your farm's success?</FormLabel>
+                <p className="text-sm text-muted-foreground italic mt-1 mb-3">
+                  Do you have any suspicions that you are losing money somewhere? Do you feel confident that you understand your market demand and sales channels? Do you have cash reserves set aside to manage unexpected emergencies?
+                </p>
                 <FormControl>
                   <Textarea 
                     {...field} 
-                    placeholder="Cash flow, seasonal fluctuations, equipment costs, labor expenses, market prices, etc..."
-                    className="min-h-[100px]"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={control}
-            name="accountingAssistance"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>What would you most like help with regarding your accounting or records?</FormLabel>
-                <FormControl>
-                  <Textarea 
-                    {...field} 
-                    placeholder="Organization, software training, financial reporting, tax planning, budgeting, etc..."
+                    placeholder="Share your thoughts on your farm's prospects and any concerns you might have..."
                     className="min-h-[100px]"
                   />
                 </FormControl>

@@ -57,9 +57,8 @@ export type FormValues = {
   
   // Your Goals
   goals: string;
-  accountingAssistance: string;
-  growthPlans: string;
-  financialChallenges: string;
+  nextImportantStep: string;
+  confidenceReasons: string;
   
   // What Drives You
   farmingMotivation: string;
