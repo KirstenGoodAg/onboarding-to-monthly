@@ -1,6 +1,7 @@
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Control } from "react-hook-form";
 import { FormValues } from "@/types/farmerForm";
 
@@ -9,7 +10,10 @@ interface AboutYourFarmSectionProps {
 }
 
 const farmTypes = [
-  "Vegetable", "Tree Fruit", "Mixed Fruit/Vegetable", "Vineyard", "Livestock", "Grain", "Floriculture", "Other"
+  "Specialty Crops", "Beef", "Pork", "Dairy", "Chicken Broilers", "Chicken Eggs", 
+  "Other Poultry", "Livestock (live animal sales)", "Value Added Products", 
+  "Consumer Packaged Goods", "By-product sales (offal, compost, etc)", 
+  "Agritourism", "Farm Consulting", "Other"
 ];
 
 const organicOptions = ["Yes", "No", "Transitioning"];
@@ -23,26 +27,41 @@ export default function AboutYourFarmSection({ control }: AboutYourFarmSectionPr
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-semibold mb-4">Tell us about your farm</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="md:col-span-2">
           <FormField
             control={control}
             name="typeOfFarm"
-            rules={{ required: "Required" }}
+            rules={{ required: "Please select at least one farm type" }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Type of Farm <span className="text-red-500">*</span></FormLabel>
-                <FormControl>
-                  <Input list="farmTypeOptions" placeholder="Select or type your farm type" {...field} />
-                </FormControl>
-                <datalist id="farmTypeOptions">
-                  {farmTypes.map(opt => (
-                    <option value={opt} key={opt} />
+                <FormLabel>Type of Farm (select all that apply) <span className="text-red-500">*</span></FormLabel>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                  {farmTypes.map(type => (
+                    <label
+                      key={type}
+                      className="flex items-center gap-2 cursor-pointer text-sm"
+                    >
+                      <Checkbox
+                        checked={field.value?.includes(type)}
+                        onCheckedChange={checked => {
+                          if (checked) {
+                            field.onChange([...(field.value || []), type]);
+                          } else {
+                            field.onChange((field.value || []).filter((v: string) => v !== type));
+                          }
+                        }}
+                      />
+                      {type}
+                    </label>
                   ))}
-                </datalist>
+                </div>
                 <FormMessage />
               </FormItem>
             )}
           />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           <FormField
             control={control}

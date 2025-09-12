@@ -9,7 +9,7 @@ export type FormValues = {
   preferredContact: string;
   
   // About Your Farm
-  typeOfFarm: string;
+  typeOfFarm: string[];
   organic: string;
   acres: string;
   livestock: string;
