@@ -32,7 +32,8 @@ export default function FarmerProfileForm() {
       productServicesDetail: "",
       organic: "",
       acres: "",
-      livestock: "",
+      salesChannels: [],
+      salesChannelDetails: "",
       entityType: "",
       years: "",
       

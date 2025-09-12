@@ -13,7 +13,8 @@ export type FormValues = {
   productServicesDetail: string;
   organic: string;
   acres: string;
-  livestock: string;
+  salesChannels: string[];
+  salesChannelDetails: string;
   entityType: string;
   years: string;
   

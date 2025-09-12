@@ -17,6 +17,11 @@ const farmTypes = [
   "Agritourism", "Farm Consulting", "Other"
 ];
 
+const salesChannelOptions = [
+  "Direct to Consumer", "Farm Stand", "CSA", "Farmers Markets", "Wholesale", 
+  "Grocery", "Delivery", "Online Shipping", "Commodity Sales", "Sales to Brokers", "Other"
+];
+
 const organicOptions = ["Yes", "No", "Transitioning", "Certified"];
 
 const entityTypes = [
@@ -28,7 +33,8 @@ export default function AboutYourFarmSection({ control }: AboutYourFarmSectionPr
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-semibold mb-4">Tell us about your farm</h2>
-        <div className="md:col-span-2">
+        
+        <div className="md:col-span-2 mb-6">
           <FormField
             control={control}
             name="typeOfFarm"
@@ -66,7 +72,7 @@ export default function AboutYourFarmSection({ control }: AboutYourFarmSectionPr
           control={control}
           name="productServicesDetail"
           render={({ field }) => (
-            <FormItem className="mt-4">
+            <FormItem className="mb-6">
               <FormLabel>Product/Services Detail</FormLabel>
               <FormControl>
                 <Textarea 
@@ -80,8 +86,7 @@ export default function AboutYourFarmSection({ control }: AboutYourFarmSectionPr
           )}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <FormField
             control={control}
             name="organic"
@@ -124,21 +129,58 @@ export default function AboutYourFarmSection({ control }: AboutYourFarmSectionPr
               </FormItem>
             )}
           />
+        </div>
 
+        <div className="md:col-span-2 mb-6">
           <FormField
             control={control}
-            name="livestock"
+            name="salesChannels"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Livestock (number and type)</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., 50 cattle, 200 chickens" {...field} />
-                </FormControl>
+                <FormLabel>Which of these sales channels do you use? (select all that apply)</FormLabel>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                  {salesChannelOptions.map(channel => (
+                    <label
+                      key={channel}
+                      className="flex items-center gap-2 cursor-pointer text-sm"
+                    >
+                      <Checkbox
+                        checked={field.value?.includes(channel)}
+                        onCheckedChange={checked => {
+                          if (checked) {
+                            field.onChange([...(field.value || []), channel]);
+                          } else {
+                            field.onChange((field.value || []).filter((v: string) => v !== channel));
+                          }
+                        }}
+                      />
+                      {channel}
+                    </label>
+                  ))}
+                </div>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
+
+        <FormField
+          control={control}
+          name="salesChannelDetails"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Sales Channel Details</FormLabel>
+              <FormControl>
+                <Textarea 
+                  {...field} 
+                  placeholder="Which are most demanding? Which do you want to focus on or get away from?"
+                  className="min-h-[100px]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </div>
 
       <div>
