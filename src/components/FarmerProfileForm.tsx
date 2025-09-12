@@ -47,6 +47,10 @@ export default function FarmerProfileForm() {
       businessAccounts: [],
       accountUsageDetails: "",
       businessPersonalSeparation: "",
+      posApps: [],
+      cashCheckPayments: "",
+      personalAccountBusiness: [],
+      governmentPayments: "",
       
       // Assets & Liabilities
       farmAssets: "",

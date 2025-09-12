@@ -28,6 +28,10 @@ export type FormValues = {
   businessAccounts: string[];
   accountUsageDetails: string;
   businessPersonalSeparation: string;
+  posApps: string[];
+  cashCheckPayments: string;
+  personalAccountBusiness: string[];
+  governmentPayments: string;
   
   // Assets & Liabilities
   farmAssets: string;

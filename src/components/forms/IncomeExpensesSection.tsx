@@ -36,6 +36,36 @@ const separationOptions = [
   { label: "Other", value: "other" }
 ];
 
+const posAppsOptions = [
+  { label: "Square", value: "square" },
+  { label: "Shopify", value: "shopify" },
+  { label: "Stripe", value: "stripe" },
+  { label: "Barn2Door", value: "barn2door" },
+  { label: "Venmo", value: "venmo" },
+  { label: "Cashapp", value: "cashapp" },
+  { label: "Zelle", value: "zelle" },
+  { label: "GoCardless", value: "gocardless" },
+  { label: "PayPal", value: "paypal" },
+  { label: "Zoho", value: "zoho" },
+  { label: "QuickBooks Online", value: "quickbooks-online" },
+  { label: "Xero", value: "xero" },
+  { label: "Other", value: "other" }
+];
+
+const yesNoOptions = [
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" }
+];
+
+const personalAccountBusinessOptions = [
+  { label: "Mortgage", value: "mortgage" },
+  { label: "Rent", value: "rent" },
+  { label: "Utilities", value: "utilities" },
+  { label: "Insurance", value: "insurance" },
+  { label: "Gas/Fuel", value: "gas-fuel" },
+  { label: "Other", value: "other" }
+];
+
 export default function IncomeExpensesSection({ control }: IncomeExpensesSectionProps) {
   return (
     <div className="space-y-6">
@@ -158,6 +188,122 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
                     <div key={opt.value} className="flex items-center space-x-2">
                       <RadioGroupItem value={opt.value} id={opt.value} />
                       <Label htmlFor={opt.value} className="text-sm cursor-pointer">
+                        {opt.label}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="posApps"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Point of Sale/Merchant Apps used for sales/invoicing (select all that apply)</FormLabel>
+              <div className="flex flex-col gap-2">
+                {posAppsOptions.map(opt => (
+                  <label
+                    key={opt.value}
+                    className="flex items-center gap-2 cursor-pointer text-sm"
+                  >
+                    <Checkbox
+                      checked={field.value?.includes(opt.value)}
+                      onCheckedChange={checked => {
+                        if (checked) {
+                          field.onChange([...(field.value || []), opt.value]);
+                        } else {
+                          field.onChange((field.value || []).filter((v: string) => v !== opt.value));
+                        }
+                      }}
+                    />
+                    {opt.label}
+                  </label>
+                ))}
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="cashCheckPayments"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Do you receive or make payments via cash or check on a monthly basis?</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  className="flex flex-col gap-2"
+                >
+                  {yesNoOptions.map(opt => (
+                    <div key={opt.value} className="flex items-center space-x-2">
+                      <RadioGroupItem value={opt.value} id={`cash-check-${opt.value}`} />
+                      <Label htmlFor={`cash-check-${opt.value}`} className="text-sm cursor-pointer">
+                        {opt.label}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="personalAccountBusiness"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Is there any business income or expense that may (inevitably or accidentally) appear on personal bank accounts? (select all that apply)</FormLabel>
+              <div className="flex flex-col gap-2">
+                {personalAccountBusinessOptions.map(opt => (
+                  <label
+                    key={opt.value}
+                    className="flex items-center gap-2 cursor-pointer text-sm"
+                  >
+                    <Checkbox
+                      checked={field.value?.includes(opt.value)}
+                      onCheckedChange={checked => {
+                        if (checked) {
+                          field.onChange([...(field.value || []), opt.value]);
+                        } else {
+                          field.onChange((field.value || []).filter((v: string) => v !== opt.value));
+                        }
+                      }}
+                    />
+                    {opt.label}
+                  </label>
+                ))}
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="governmentPayments"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Have you received income from grants and/or government payments?</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  className="flex flex-col gap-2"
+                >
+                  {yesNoOptions.map(opt => (
+                    <div key={opt.value} className="flex items-center space-x-2">
+                      <RadioGroupItem value={opt.value} id={`government-${opt.value}`} />
+                      <Label htmlFor={`government-${opt.value}`} className="text-sm cursor-pointer">
                         {opt.label}
                       </Label>
                     </div>
