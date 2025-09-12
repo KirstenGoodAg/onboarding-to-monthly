@@ -21,8 +21,6 @@ export type FormValues = {
   // Income & Expenses
   lastYearRevenue: string;
   expectedRevenue: string;
-  payroll: string[];
-  employees: string;
   receipts: string;
   bookkeepingSystem: string;
   businessAccounts: string[];
@@ -38,6 +36,11 @@ export type FormValues = {
     expensesUp: string[];
     expensesDown: string[];
   };
+  w2Employees: string;
+  contractors1099: string;
+  h2aEmployees: string;
+  payrollSoftware: string;
+  paymentMethods: string[];
   
   // Assets & Liabilities
   farmAssets: string;

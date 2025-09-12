@@ -40,8 +40,6 @@ export default function FarmerProfileForm() {
       // Income & Expenses
       lastYearRevenue: "",
       expectedRevenue: "",
-      payroll: [],
-      employees: "",
       receipts: "",
       bookkeepingSystem: "",
       businessAccounts: [],
@@ -57,6 +55,11 @@ export default function FarmerProfileForm() {
         expensesUp: [],
         expensesDown: []
       },
+      w2Employees: "",
+      contractors1099: "",
+      h2aEmployees: "",
+      payrollSoftware: "",
+      paymentMethods: [],
       
       // Assets & Liabilities
       farmAssets: "",

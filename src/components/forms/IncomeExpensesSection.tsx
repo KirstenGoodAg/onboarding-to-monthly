@@ -4,17 +4,29 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Control } from "react-hook-form";
+import { Control, useWatch } from "react-hook-form";
 import { FormValues } from "@/types/farmerForm";
 
 interface IncomeExpensesSectionProps {
   control: Control<FormValues>;
 }
 
-const payrollOptions = [
-  { label: "Employees", value: "employees" },
-  { label: "Contractors", value: "contractors" },
-  { label: "Neither", value: "neither" }
+const payrollSoftwareOptions = [
+  { label: "Gusto", value: "gusto" },
+  { label: "Onpay", value: "onpay" },
+  { label: "Quickbooks", value: "quickbooks" },
+  { label: "Xero", value: "xero" },
+  { label: "Other", value: "other" },
+  { label: "I don't use payroll software", value: "none" }
+];
+
+const paymentMethodOptions = [
+  { label: "Cash", value: "cash" },
+  { label: "Check", value: "check" },
+  { label: "Venmo", value: "venmo" },
+  { label: "Cashapp", value: "cashapp" },
+  { label: "Zelle", value: "zelle" },
+  { label: "Other", value: "other" }
 ];
 
 const bookkeepingSystems = [
@@ -83,6 +95,8 @@ const fluctuationTypes = [
 ];
 
 export default function IncomeExpensesSection({ control }: IncomeExpensesSectionProps) {
+  const payrollSoftware = useWatch({ control, name: "payrollSoftware" });
+
   return (
     <div className="space-y-6">
       <div>
@@ -386,15 +400,43 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
           )}
         />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <FormField
             control={control}
-            name="employees"
+            name="w2Employees"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Total number of employees</FormLabel>
+                <FormLabel>Number of W2 Employees</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Number of employees" type="number" min="0" />
+                  <Input {...field} placeholder="0" type="number" min="0" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="contractors1099"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Number of 1099 Contractors</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="0" type="number" min="0" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="h2aEmployees"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Number of H2A Employees</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="0" type="number" min="0" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -404,12 +446,40 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
 
         <FormField
           control={control}
-          name="payroll"
+          name="payrollSoftware"
           render={({ field }) => (
             <FormItem className="mb-6">
-              <FormLabel>Do you process payroll? (select all that apply)</FormLabel>
+              <FormLabel>Do you use payroll software?</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  className="flex flex-col gap-2"
+                >
+                  {payrollSoftwareOptions.map(opt => (
+                    <div key={opt.value} className="flex items-center space-x-2">
+                      <RadioGroupItem value={opt.value} id={`payroll-${opt.value}`} />
+                      <Label htmlFor={`payroll-${opt.value}`} className="text-sm cursor-pointer">
+                        {opt.label}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Conditional payment methods question */}
+        <FormField
+          control={control}
+          name="paymentMethods"
+          render={({ field }) => (
+            <FormItem className={`mb-6 ${payrollSoftware !== "none" ? "hidden" : ""}`}>
+              <FormLabel>How do you pay your employees? (select all that apply)</FormLabel>
               <div className="flex flex-col gap-2">
-                {payrollOptions.map(opt => (
+                {paymentMethodOptions.map(opt => (
                   <label
                     key={opt.value}
                     className="flex items-center gap-2 cursor-pointer text-sm"
@@ -428,6 +498,7 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
                   </label>
                 ))}
               </div>
+              <FormMessage />
             </FormItem>
           )}
         />
