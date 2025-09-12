@@ -73,10 +73,100 @@ export default function WhatDrivesYouSection({ control }: WhatDrivesYouSectionPr
 
           <FormField
             control={control}
+            name="idealFarmerLife"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>What does your ideal life as a farmer look like?</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field} 
+                    placeholder="Describe your vision of the perfect farming lifestyle..."
+                    className="min-h-[100px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="favoriteAndLeastFavorite"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>What are your favorite and least favorite things about the farming business?</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field} 
+                    placeholder="Share what you love most and what challenges you the most..."
+                    className="min-h-[100px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="farmingBarriers"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>In your experience, what are the greatest barriers to running a successful farm?</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field} 
+                    placeholder="Describe the biggest challenges you face or have observed..."
+                    className="min-h-[100px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="optimisticOutlook"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Are you optimistic about the upcoming year? Why or why not?</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field} 
+                    placeholder="Share your outlook and what factors influence your perspective..."
+                    className="min-h-[100px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="agricultureInfluences"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Who are some of your greatest influences in agriculture?</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field} 
+                    placeholder="Mentors, authors, farmers, researchers, or others who have shaped your approach..."
+                    className="min-h-[100px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
             name="additional"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Additional questions, comments, or anything else you'd like us to know?</FormLabel>
+                <FormLabel>Additional questions, comments, or anything else you would like us to know?</FormLabel>
                 <FormControl>
                   <Textarea 
                     {...field} 

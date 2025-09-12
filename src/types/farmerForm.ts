@@ -47,5 +47,10 @@ export type FormValues = {
   farmingMotivation: string;
   communityImpact: string;
   sustainabilityFocus: string;
+  idealFarmerLife: string;
+  favoriteAndLeastFavorite: string;
+  farmingBarriers: string;
+  optimisticOutlook: string;
+  agricultureInfluences: string;
   additional: string;
 };

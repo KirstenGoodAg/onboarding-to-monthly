@@ -66,6 +66,11 @@ export default function FarmerProfileForm() {
       farmingMotivation: "",
       communityImpact: "",
       sustainabilityFocus: "",
+      idealFarmerLife: "",
+      favoriteAndLeastFavorite: "",
+      farmingBarriers: "",
+      optimisticOutlook: "",
+      agricultureInfluences: "",
       additional: ""
     }
   });
