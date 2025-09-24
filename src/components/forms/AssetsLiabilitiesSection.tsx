@@ -1,7 +1,7 @@
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
+import { FormField, FormItem, FormControl } from "@/components/ui/form";
 import { Control } from "react-hook-form";
 import { FormValues } from "@/types/farmerForm";
+import FileUploadSection from "./FileUploadSection";
 
 interface AssetsLiabilitiesSectionProps {
   control: Control<FormValues>;
@@ -16,24 +16,22 @@ export default function AssetsLiabilitiesSection({ control }: AssetsLiabilitiesS
           Help us understand your farm's financial position by providing details about your assets and liabilities.
         </p>
         
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div>
-            <h3 className="text-lg font-medium mb-4">Assets</h3>
-            <div className="space-y-4">
+            <h2 className="text-xl font-semibold mb-6">Assets</h2>
+            <div className="space-y-6">
               <FormField
                 control={control}
-                name="farmAssets"
+                name="assets"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Farm Assets (livestock, crops, inventory)</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        {...field} 
-                        placeholder="Describe your farm assets including livestock, stored crops, supplies, etc..."
-                        className="min-h-[80px]"
+                      <FileUploadSection
+                        title="Farm Assets"
+                        items={field.value || []}
+                        onItemsChange={field.onChange}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -43,15 +41,13 @@ export default function AssetsLiabilitiesSection({ control }: AssetsLiabilitiesS
                 name="equipment"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Equipment & Machinery</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        {...field} 
-                        placeholder="List major equipment, tractors, implements, vehicles, etc..."
-                        className="min-h-[80px]"
+                      <FileUploadSection
+                        title="Equipment & Machinery"
+                        items={field.value || []}
+                        onItemsChange={field.onChange}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -61,15 +57,13 @@ export default function AssetsLiabilitiesSection({ control }: AssetsLiabilitiesS
                 name="realEstate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Real Estate & Property</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        {...field} 
-                        placeholder="Describe farm land, buildings, facilities you own..."
-                        className="min-h-[80px]"
+                      <FileUploadSection
+                        title="Real Estate & Property"
+                        items={field.value || []}
+                        onItemsChange={field.onChange}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -77,22 +71,20 @@ export default function AssetsLiabilitiesSection({ control }: AssetsLiabilitiesS
           </div>
 
           <div>
-            <h3 className="text-lg font-medium mb-4">Liabilities</h3>
-            <div className="space-y-4">
+            <h2 className="text-xl font-semibold mb-6">Liabilities</h2>
+            <div className="space-y-6">
               <FormField
                 control={control}
                 name="loans"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Outstanding Loans</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        {...field} 
-                        placeholder="List any equipment loans, real estate mortgages, operating loans, etc..."
-                        className="min-h-[80px]"
+                      <FileUploadSection
+                        title="Outstanding Loans"
+                        items={field.value || []}
+                        onItemsChange={field.onChange}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -102,15 +94,13 @@ export default function AssetsLiabilitiesSection({ control }: AssetsLiabilitiesS
                 name="creditLines"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Credit Lines & Other Debts</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        {...field} 
-                        placeholder="Operating lines of credit, credit cards, supplier credit, etc..."
-                        className="min-h-[80px]"
+                      <FileUploadSection
+                        title="Credit Lines & Other Debts"
+                        items={field.value || []}
+                        onItemsChange={field.onChange}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />

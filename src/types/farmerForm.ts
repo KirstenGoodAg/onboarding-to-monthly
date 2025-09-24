@@ -44,11 +44,31 @@ export type FormValues = {
   commonVendors: string;
   
   // Assets & Liabilities
-  farmAssets: string;
-  equipment: string;
-  realEstate: string;
-  loans: string;
-  creditLines: string;
+  assets: Array<{
+    description: string;
+    file?: File;
+    fileName?: string;
+  }>;
+  equipment: Array<{
+    description: string;
+    file?: File;
+    fileName?: string;
+  }>;
+  realEstate: Array<{
+    description: string;
+    file?: File;
+    fileName?: string;
+  }>;
+  loans: Array<{
+    description: string;
+    file?: File;
+    fileName?: string;
+  }>;
+  creditLines: Array<{
+    description: string;
+    file?: File;
+    fileName?: string;
+  }>;
   
   // Taxes
   taxesFiled: string;

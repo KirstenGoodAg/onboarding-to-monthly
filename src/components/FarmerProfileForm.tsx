@@ -63,11 +63,11 @@ export default function FarmerProfileForm() {
       commonVendors: "",
       
       // Assets & Liabilities
-      farmAssets: "",
-      equipment: "",
-      realEstate: "",
-      loans: "",
-      creditLines: "",
+      assets: [],
+      equipment: [],
+      realEstate: [],
+      loans: [],
+      creditLines: [],
       
       // Taxes
       taxesFiled: "",
