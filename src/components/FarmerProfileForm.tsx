@@ -42,6 +42,7 @@ export default function FarmerProfileForm() {
       expectedRevenue: "",
       receipts: "",
       bookkeepingSystem: "",
+      accrualAccounting: "",
       businessAccounts: [],
       accountUsageDetails: "",
       businessPersonalSeparation: "",

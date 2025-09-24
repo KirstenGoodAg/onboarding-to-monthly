@@ -1,5 +1,5 @@
 import { FormField, FormItem, FormControl } from "@/components/ui/form";
-import { Control } from "react-hook-form";
+import { Control, useWatch } from "react-hook-form";
 import { FormValues } from "@/types/farmerForm";
 import FileUploadSection from "./FileUploadSection";
 
@@ -8,6 +8,7 @@ interface AssetsLiabilitiesSectionProps {
 }
 
 export default function AssetsLiabilitiesSection({ control }: AssetsLiabilitiesSectionProps) {
+  const accrualAccounting = useWatch({ control, name: "accrualAccounting" });
   return (
     <div className="space-y-6">
       <div>
@@ -20,21 +21,23 @@ export default function AssetsLiabilitiesSection({ control }: AssetsLiabilitiesS
           <div>
             <h2 className="text-xl font-semibold mb-6">Assets</h2>
             <div className="space-y-6">
-              <FormField
-                control={control}
-                name="assets"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <FileUploadSection
-                        title="Farm Assets"
-                        items={field.value || []}
-                        onItemsChange={field.onChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              {accrualAccounting !== "no" && (
+                <FormField
+                  control={control}
+                  name="assets"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <FileUploadSection
+                          title="Farm Assets"
+                          items={field.value || []}
+                          onItemsChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              )}
 
               <FormField
                 control={control}

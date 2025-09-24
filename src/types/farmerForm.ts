@@ -23,6 +23,7 @@ export type FormValues = {
   expectedRevenue: string;
   receipts: string;
   bookkeepingSystem: string;
+  accrualAccounting: string;
   businessAccounts: string[];
   accountUsageDetails: string;
   businessPersonalSeparation: string;

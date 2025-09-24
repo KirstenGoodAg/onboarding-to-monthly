@@ -155,6 +155,33 @@ export default function IncomeExpensesSection({ control }: IncomeExpensesSection
 
         <FormField
           control={control}
+          name="accrualAccounting"
+          render={({ field }) => (
+            <FormItem className="mb-6">
+              <FormLabel>Are you using accrual accounting?</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  className="flex flex-col gap-2"
+                >
+                  {yesNoOptions.map(opt => (
+                    <div key={opt.value} className="flex items-center space-x-2">
+                      <RadioGroupItem value={opt.value} id={`accrual-${opt.value}`} />
+                      <Label htmlFor={`accrual-${opt.value}`} className="text-sm cursor-pointer">
+                        {opt.label}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
           name="businessAccounts"
           render={({ field }) => (
             <FormItem className="mb-6">
