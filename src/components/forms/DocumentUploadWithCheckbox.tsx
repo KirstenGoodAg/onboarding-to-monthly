@@ -101,7 +101,7 @@ export default function DocumentUploadWithCheckbox({
                     htmlFor={`provide-${index}`} 
                     className={`text-sm cursor-pointer ${doc.notApplicable ? 'line-through opacity-50' : ''}`}
                   >
-                    Can Provide
+                    Uploaded
                   </label>
                 </div>
                 <div className="flex items-center space-x-2">
