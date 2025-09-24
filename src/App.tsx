@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import FileUpload from "./pages/FileUpload";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import Shoebox from "./pages/Shoebox";
 import Inbox from "./pages/Inbox";
 import Transactions from "./pages/Transactions";
 import Reports from "./pages/Reports";
@@ -29,6 +30,7 @@ const App = () => (
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/upload" element={<FileUpload />} />
+              <Route path="/shoebox" element={<Shoebox />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/reports" element={<Reports />} />
