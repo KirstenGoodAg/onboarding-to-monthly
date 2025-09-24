@@ -1,8 +1,8 @@
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Control } from "react-hook-form";
 import { FormValues } from "@/types/farmerForm";
+import DocumentUploadWithCheckbox from "./DocumentUploadWithCheckbox";
 
 interface TaxesSectionProps {
   control: Control<FormValues>;
@@ -93,30 +93,11 @@ export default function TaxesSection({ control }: TaxesSectionProps) {
               <FormItem>
                 <FormLabel>Are you able to provide the following documents?</FormLabel>
                 <FormControl>
-                  <div className="space-y-3">
-                    {documentOptions.map((document) => (
-                      <div key={document} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={document}
-                          checked={field.value?.includes(document) || false}
-                          onCheckedChange={(checked) => {
-                            const currentValue = field.value || [];
-                            if (checked) {
-                              field.onChange([...currentValue, document]);
-                            } else {
-                              field.onChange(currentValue.filter((item) => item !== document));
-                            }
-                          }}
-                        />
-                        <label
-                          htmlFor={document}
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          {document}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
+                  <DocumentUploadWithCheckbox
+                    documents={field.value || []}
+                    onDocumentsChange={field.onChange}
+                    documentOptions={documentOptions}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

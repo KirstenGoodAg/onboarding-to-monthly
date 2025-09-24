@@ -74,7 +74,13 @@ export type FormValues = {
   // Taxes
   taxesFiled: string;
   profitLoss: string;
-  availableDocuments: string[];
+  availableDocuments: Array<{
+    name: string;
+    canProvide: boolean;
+    notApplicable: boolean;
+    file?: File;
+    fileName?: string;
+  }>;
   
   // Your Goals
   goals: string;
